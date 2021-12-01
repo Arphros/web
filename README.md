@@ -4,13 +4,14 @@
 
 ## Getting Started
 
-### Prerequisites  
+### Prerequisites
 
-For this project you need [__Node__](https://nodejs.org/en/) installed on your machine with [__Npm__](https://www.npmjs.com/) or [__Yarn__](https://yarnpkg.com).
+For this project you need [**Node**](https://nodejs.org/en/) installed on your machine with [**Npm**](https://www.npmjs.com/) or [**Yarn**](https://yarnpkg.com).
 
 ### Download
 
-You can clone this repository using __Git__:
+You can clone this repository using **Git**:
+
 ```bash
 git clone https://github.com/dj0nny/svelte-express-boilerplate.git
 ```
@@ -40,9 +41,9 @@ npm run serve:client
 
 ## Built with ❤️ using:
 
-* [Node.js](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
-* [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
-* [Svelte.js](https://github.com/u3u/vue-hooks) - Javascript framework
+- [Node.js](https://nodejs.org/en/) - JavaScript runtime built on Chrome's V8 JavaScript engine.
+- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+- [Svelte.js](https://github.com/u3u/vue-hooks) - Javascript framework
 
 ## Contributing
 
