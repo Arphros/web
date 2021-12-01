@@ -70,7 +70,6 @@
             if(stackMessage[username] != null){
                 let oldMessageTimestamp = stackMessage[username].timestamp;
                 if (timestamp - oldMessageTimestamp < 2){
-                    msg.value = "";
                     return;
                 }
             }
