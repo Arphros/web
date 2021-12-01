@@ -6,6 +6,9 @@
     export let isConnect
 
     const socket = io('http://localhost:5000/');
+
+    let stackMessage = {};
+
     onMount(() => {   
     socket.on("connect", () => {
       isConnect = socket.connected;
@@ -62,8 +65,22 @@
                 alert("Message is too long!");
                 return;
             }
+            let timestamp = Math.floor(Date.now() / 1000);
+            let username = "Anonymous";
+            if(stackMessage[username] != null){
+                let oldMessageTimestamp = stackMessage[username].timestamp;
+                if (timestamp - oldMessageTimestamp < 2){
+                    msg.value = "";
+                    return;
+                }
+            }
+
+            stackMessage[username] = {
+                content: msgVal,
+                timestamp: timestamp
+            }
             socket.emit("chat message", {
-                username: 'Anonymous',
+                username: username,
                 avatar: '/assets/images/__default.png',
                 timestamp: new Date().toLocaleString(),
                 content: isBadWord ? '' : msgVal,
@@ -90,7 +107,7 @@
         </div>
         <form class="w-full h-full" id="msg-form">
             <div class="relative">
-            <input type="text" name="msg" id="msg-input" class="w-full rounded-r-md border focus:outline-none p-2" placeholder="Enter your message..." disabled={isConnect ? false : true} />
+            <input autocomplete="off" type="text" name="msg" id="msg-input" class="w-full rounded-r-md border focus:outline-none p-2" placeholder="Enter your message..." disabled={isConnect ? false : true} />
             <input type="submit" class="absolute bg-green-500 right-0 bottom-0 text-white p-2 rounded-r-md h-full" value="Send" disabled={isConnect ? false : true} />
             </div>
         </form>

@@ -49,11 +49,11 @@
 
         <h2>8. Your Privacy</h2>
 
-        <p>Please read our Privacy Policy.</p>
+        <p>Please read our <a class="text-blue-600 hover:underline" href="privacy">Privacy Policy</a>.</p>
 
         <h2>9. Governing Law</h2>
 
-        <p>Any claim related to Arphros's Website shall be governed by the laws of th without regards to its conflict of law provisions.</p>
+        <p>Any claim related to Arphros's Website shall be governed by the laws of <a class="text-blue-600 hover:underline" href="https://en.wikipedia.org/wiki/Law_of_Thailand">Thailand</a> without regards to its conflict of law provisions.</p>
         </div>
     </div>
 </main>
