@@ -65,9 +65,10 @@
                 alert("Message is too long!");
                 return;
             }
+
             let timestamp = Math.floor(Date.now() / 1000);
             let username = "Anonymous";
-            if(stackMessage[username] != null){
+            if(stackMessage[username] !== null){
                 let oldMessageTimestamp = stackMessage[username].timestamp;
                 if (timestamp - oldMessageTimestamp < 2){
                     return;
