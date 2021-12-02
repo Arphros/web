@@ -1,3 +1,3 @@
 # ArphrosWeb
 
-https://arphros.ddns.net:3000/
+http://arphros.ddns.net:3000/
