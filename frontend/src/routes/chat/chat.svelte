@@ -1,13 +1,13 @@
 <script lang="ts">
     let channelName = "#Lobby";
-     let messageList = [];
+    let messageList = [];
     import { io } from "socket.io-client"
     import { onMount } from "svelte";
-    export let isConnect
+    let isConnect
+    let lastMessageTime;
+    let cooldown = 450;
 
     const socket = io('http://localhost:5000/');
-
-    let stackMessage = {};
 
     onMount(() => {   
     socket.on("connect", () => {
@@ -66,25 +66,18 @@
                 return;
             }
 
-            let timestamp = Math.floor(Date.now() / 1000);
-            let username = "Anonymous";
-            if(stackMessage[username] !== null){
-                let oldMessageTimestamp = stackMessage[username].timestamp;
-                if (timestamp - oldMessageTimestamp < 2){
-                    return;
-                }
+            if((lastMessageTime && Date.now() - lastMessageTime) < cooldown) {
+                alert("Chill, that's too fast!");
+                return;
             }
 
-            stackMessage[username] = {
-                content: msgVal,
-                timestamp: timestamp
-            }
             socket.emit("chat message", {
-                username: username,
+                username: "Anonymous",
                 avatar: '/assets/images/__default.png',
                 timestamp: new Date().toLocaleString(),
                 content: isBadWord ? '' : msgVal,
             });
+            lastMessageTime = Date.now()
             msg.value = '';
         } 
     });
@@ -101,7 +94,7 @@
           </button>
         </h1>
         <h1 class="text-{isConnect ? 'green' : 'red'}-500 text-lg">
-          {isConnect ? "User connected!" : "User disconnected!"}
+          {isConnect ? "User connected!" : "User disconnected!"} <br> 
         </h1>
         <div class="container max-h-full overflow-scroll" id="msg-container">          
         </div>
@@ -132,5 +125,8 @@
             transform: scale(1);
             opacity: 1;
         }
+    }
+    .z-999 {
+        z-index: 999;   
     }
 </style>

@@ -4,6 +4,8 @@
   "scripts": {
     "start": "node src/app"
   },
+  "author": "ArprhosTeam",
+  "license": "Apache-2.0",
   "dependencies": {
     "autoprefixer": "^10.4.0",
     "chart.js": "^3.6.0",

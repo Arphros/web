@@ -3,6 +3,9 @@ const app = express();
 const http = require("http");
 const server = http.createServer(app);
 
+const clientSocketIO = require("socket.io-client");
+const socketClient = clientSocketIO.connect("http://localhost:3000");
+
 const port = process.env.PORT || 5000;
 server.listen(port, () => {
   console.log(`Listening on port ${port}`);
@@ -11,7 +14,7 @@ server.listen(port, () => {
 const cors = require("cors");
 app.use(cors());
 //app.use(express.urlencoded({ extended: true }));
-//app.use(express.json());
+app.use(express.json());
 
 app.use('/public', express.static(__dirname + '/public'));
 app.set('view engine', 'ejs');
@@ -27,4 +30,8 @@ io.on("connection", (socket) => {
     msgArr === 30 ? msgArr.shift() : null;
     io.emit("message list", msgArr);
   });
+});
+
+app.get("/api/chat/get", (req, res) => {
+
 });
