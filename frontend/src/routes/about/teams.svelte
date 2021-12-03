@@ -21,17 +21,17 @@
             <div class="dev-container">
                 <center><img src="/assets/dev/Redark.png" class="rounded-full" width="70px" alt="dev"></center>
                 <h1 class="dev">Redark</h1>
-                <p class="text-center">In game coding</p>
+                <p class="text-center">In-Game coding</p>
             </div>
             <div class="dev-container">
                 <center><img src="/assets/dev/HappyGamer.png" class="rounded-full" width="70px" alt="dev"></center>
                 <h1 class="dev">HappyGamer3194</h1>
-                <p class="text-center">Grammar Checker and UI Design</p>
+                <p class="text-center">UI Design and Grammar Overseer</p>
             </div>
             <div class="dev-container">
                 <center><img src="/assets/dev/Tinvv.png" class="rounded-full" width="70px" alt="dev"></center>
                 <h1 class="dev">Tinvv</h1>
-                <p class="text-center">Frontend and Backend Developer</p>
+                <p class="text-center">Frontend/Backend Developer</p>
             </div>
         </div>
     </div>
