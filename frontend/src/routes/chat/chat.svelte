@@ -7,13 +7,14 @@
 	//#region variables
 	let channelName = '#Lobby';
 	let cooldown = 450;
+    let webSocketUrl = "ws://arphros.ddns.net:5000/"
 	let connectionState;
 	let lastMessageTime;
 	//#endregion
 
     //#region On mount
 	onMount(() => {
-		const socket = io('ws://localhost:5000/');
+		const socket = io(webSocketUrl);
         //#region On connection close, open
 		socket.on('connect', () => {
 			connectionState = socket.connected;
