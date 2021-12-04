@@ -8,7 +8,7 @@
 
     onMount(async() => {
         const userBanner = document.getElementById("user-banner");
-        if(userBanner.height === 24 || userBanner.heigt === 0) {
+        if(userBanner.height === 24 || userBanner.height === 0) {
             userBanner.src = "/user/banner/__default.png";
         }
         fetch('http://localhost:3000/api/auth/user', { method: "POST", body: JSON.stringify({ id: user }) })
