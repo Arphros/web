@@ -17,7 +17,12 @@ app.use(express.json());
 //app.set('view engine', 'ejs');
 
 const { Server } = require("socket.io");
-const io = new Server(server);
+const io = new Server(server,{
+    cors: {
+      origin: "*",
+      methods: ["GET", "POST", "PUT", "DELETE"],
+    }
+});
 
 io.on("connection", (socket) => {
   socket.on("chat message", (data) => {

@@ -1,3 +1,27 @@
+<script context="module">
+    export async function load({ session }) {
+		if(session !== undefined) {
+			if (session.authenticated) {
+				return {
+					status: 200,
+					redirect: '/profile'
+				};
+			} else {
+				return {
+					props: {
+						username: session.username,
+						id: session.id
+					}
+				}
+			}
+		}
+    }
+</script>
+<script lang="ts">
+    let email;
+    let id;
+</script>
+
 <svelte:head>
 	<title>Arphros | Register</title>
 </svelte:head>

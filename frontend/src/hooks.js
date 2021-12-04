@@ -1,37 +1,41 @@
 import db from '$lib/database/database';
 import cookie from 'cookie';
 
-export const handle = async ({ request, resolve }) => {
-	const cookies = cookie.parse(request.headers.cookie || '');
-	console.log(cookies);
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
+export const getContext = async({ headers }) => {
+	const cookies = cookie.parse(headers.cookie || '');
 
-	request.locals.user = cookies;
-
-	if (!cookies.session_id) {
-		request.locals.user.authenticated = false;
-	} else {
-		request.locals.user.authenticated = true;
+	if(!cookies.session_id) {
+		return {
+			authenticated: false
+		};
 	}
 
-	// let rows = await db.execute("SELECT * FROM session WHERE session = ?", [cookies.session_id]);
+	let rows = await db.execute("SELECT * FROM session WHERE session = ?", [cookies.session_id])[0][0];
 
-	// console.log(rows)
+	if (rows) {
+		rows = await db.execute("SELECT * FROM user WHERE id = ?", [rows.id])[0][0];
+		return {
+			authenticated: true,
+			id: rows.id,
+			username: rows.username
+		};
 
-	const response = await resolve(request);
-
-	return {
-		...response
-	};
+	}
 };
 
-export const getSession = (request) => {
-	const user = request.locals.user;
+export const getSession = async ({ context }) => {
+	if(context !== undefined) {
+		if (!context.authenticated) {
+			return {
+				authenticated: false
+			};
+		}
 
-	if (!user.session_id) {
-		return { authenticated: false };
+		return {
+			authenticated: true,
+			id: context.id,
+			username: context.username
+		};
 	}
-
-	console.log(user);
-
-	return { user };
 };

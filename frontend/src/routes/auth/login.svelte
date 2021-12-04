@@ -1,5 +1,14 @@
+<script context="module">
+    export async function load({ session }) {
+
+    }
+</script>
+<script lang="ts">
+	export let username
+</script>
+
 <svelte:head>
-	<title>Arphros | Login</title>
+	<title>Arphros | {username}</title>
 </svelte:head>
 <main>
 	<div class="h-full flex justify-center p-24">
