@@ -1,31 +1,21 @@
-<script context="module">
-    export async function load({ session }) {
-        if (session.authenticated === true) {
-            return {
-                props: {
-                    username: session.username,
-                    id: session.id
-                }
-            }
-        } else {
-            return {
-                status: 302,
-				redirect: '/auth/login'
-			};
-        }
-    }
-</script>
 <script lang="ts">
+    import { page } from '$app/stores';
     import { onMount } from "svelte";
 
     export let username
     export let id
+    export let user = $page.params.user
 
-    onMount(() => {
+    onMount(async() => {
         const userBanner = document.getElementById("user-banner");
-        if(userBanner.height === 24 || userBanner.height === 0) {
+        if(userBanner.height === 24 || userBanner.heigt === 0) {
             userBanner.src = "/user/banner/__default.png";
         }
+        fetch('http://localhost:3000/api/auth/user', { method: "POST", body: JSON.stringify({ id: user }) })
+        .then(res => res.json())
+        .then((data) => {
+            username = data.user.username
+        })
     })
 </script>
 
@@ -43,7 +33,7 @@
                         class="rounded-t-xl w-full transition-all duration-100 darken-image"
                 />
             </div>
-            <h1 class="text-6xl font-bold text-center m-6 border-t p-4">{username}</h1>
+            <h1 class="text-6xl font-bold text-center m-6 border-t p-4">User {username}</h1>
         </div>
     </div>
 </main>
