@@ -1,13 +1,12 @@
 import db from '$lib/database/database';
-import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 
 export const post = async (req) => {
 	const username = req.body.get('username');
 	const email = req.body.get('email');
 	const password = req.body.get('password');
-	const hashPassword = crypto.createHash('sha256').update(password).digest('hex');
+	const hashPassword = bcrypt.hashSync(password, 32);
 
-	console.log(username);
 
 	if (!username || !email || !password) {
 		return {

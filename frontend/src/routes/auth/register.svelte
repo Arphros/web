@@ -1,25 +1,22 @@
 <script context="module">
-    export async function load({ session }) {
-		if(session !== undefined) {
-			if (session.authenticated) {
-				return {
-					status: 200,
-					redirect: '/profile'
-				};
-			} else {
-				return {
-					props: {
-						username: session.username,
-						id: session.id
-					}
+	export async function load({ session }) {
+		console.log(session);
+		if (session.authenticated === true) {
+			return {
+				status: 302,
+				redirect: '/profile'
+			};
+		} else {
+			return {
+				props: {
+					isAuth: false
 				}
 			}
 		}
-    }
+	}
 </script>
 <script lang="ts">
-    let email;
-    let id;
+	export let isAuth
 </script>
 
 <svelte:head>

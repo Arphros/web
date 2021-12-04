@@ -1,14 +1,25 @@
 <script context="module">
     export async function load({ session }) {
-
-    }
+		if (session.authenticated === true) {
+			return {
+                status: 302,
+				redirect: '/profile'
+			};
+		} else {
+			return {
+				props: {
+					isAuth: false
+				}
+			}
+		}
+	}
 </script>
 <script lang="ts">
-	export let username
+	export let isAuth
 </script>
 
 <svelte:head>
-	<title>Arphros | {username}</title>
+	<title>Arphros | Login</title>
 </svelte:head>
 <main>
 	<div class="h-full flex justify-center p-24">
