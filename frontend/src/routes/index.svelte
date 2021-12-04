@@ -2,7 +2,7 @@
 	<title>Arphros | Home</title>
 </svelte:head>
 <main>
-	<div class="h-screen flex justify-center">
+	<div class="h-full flex justify-center">
 		<div
 			class="bg-white shadow-2xl max-w-9xl w-9/12 m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20"
 		>
@@ -11,7 +11,7 @@
 			>
 				<h1 class="text-white text-4xl font-bold">Home</h1>
 			</div>
-			<div class="grid grid-cols-2 m-6 h-full w-full">
+			<div class="grid md:grid-cols-2 grid-rows-2 m-6 h-full w-full">
 				<div class="blog">
 					<h1 class="text-3xl font-bold">Blog</h1>
 				</div>

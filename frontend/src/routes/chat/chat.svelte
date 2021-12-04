@@ -127,21 +127,21 @@
 					: 'User disconnected!'
                 } <br />
 			</h1>
-			<div class="container max-h-full overflow-scroll" id="msg-container" />
+					<div class="container max-h-full overflow-scroll" id="msg-container" />
 			<form class="w-full h-full" id="msg-form">
 				<div class="relative">
 					<input
-						autocomplete="off"
-						type="text"
-						name="msg"
-						id="msg-input"
-						class="w-full rounded-r-md border focus:outline-none p-2"
-						placeholder="Enter your message..."
+							autocomplete="off"
+							type="text"
+							name="msg"
+							id="msg-input"
+							class="w-full rounded-r-md border focus:outline-none p-2"
+							placeholder="Enter your message..."
 					/>
 					<input
-						type="submit"
-						class="absolute bg-green-500 right-0 bottom-0 text-white p-2 rounded-r-md h-full"
-						value="Send"
+							type="submit"
+							class="absolute bg-green-500 right-0 bottom-0 text-white p-2 rounded-r-md h-full"
+							value="Send"
 					/>
 				</div>
 			</form>

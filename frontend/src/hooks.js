@@ -1,37 +1,45 @@
 import db from '$lib/database/database';
 import cookie from 'cookie';
 
-export const handle = async ({ request, resolve }) => {
+export const handle = async({ request, resolve }) => {
 	const cookies = cookie.parse(request.headers.cookie || '');
-	console.log(cookies);
 
 	request.locals.user = cookies;
 
-	if (!cookies.session_id) {
-		request.locals.user.authenticated = false;
+	if(!cookies.session_id) {
+		request.locals.user.authenticated = false
 	} else {
-		request.locals.user.authenticated = true;
+		request.locals.user.authenticated = true
 	}
 
-	// let rows = await db.execute("SELECT * FROM session WHERE session = ?", [cookies.session_id]);
+	if(cookies.session_id) {
+		let rows = await db.execute("SELECT * FROM session WHERE session = ?", [cookies.session_id]);
+		if (rows[0][0]) {
+			if(rows[0].length > 1) {
+				await db.execute("DELETE FROM session WHERE id = ?", [rows[0][0].id])
+			}
+			rows = await db.execute("SELECT * FROM user WHERE id = ?", [rows[0][0].id]);
+			request.locals.user.id = rows[0][0].id;
+			request.locals.user.username = rows[0][0].username;
+		}
 
-	// console.log(rows)
-
-	const response = await resolve(request);
-
-	return {
-		...response
-	};
+		const res = await resolve(request);
+		return {
+			...res
+		}
+	}
 };
 
-export const getSession = (request) => {
-	const user = request.locals.user;
-
-	if (!user.session_id) {
-		return { authenticated: false };
+export const getSession = async (request) => {
+	if (!request.locals.user.authenticated) {
+		return {
+			authenticated: false
+		};
 	}
 
-	console.log(user);
-
-	return { user };
+	return {
+		authenticated: true,
+		id: request.locals.user.id,
+		username: request.locals.user.username
+	};
 };
