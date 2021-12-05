@@ -1,10 +1,13 @@
 <script context="module">
+    //#region Load Session
     export async function load({ session }) {
         if (session.authenticated === true) {
             return {
                 props: {
                     username: session.username,
-                    id: session.id
+                    id: session.id,
+                    info: session.info,
+                    about: session.about
                 }
             }
         } else {
@@ -14,129 +17,159 @@
 			};
         }
     }
+    //#endregion
 </script>
 <script lang="ts">
-    export let username
+    //#region Modules
+    import { onMount } from "svelte";
+    import { marked } from 'marked';
+    import DOMPurify from 'dompurify';
+    //#endregion
+
+    //#region Variables
+    export let username;
     export let id
+    export let info;
+    export let about;
+    //#endregion
+
+    //#region onMount
+    onMount(() => {
+
+        //#region Render about me
+        document.getElementById('aboutme').innerHTML =
+            DOMPurify.sanitize(marked.parse(about));
+        //#endregion
+
+        //#region Image
+        const fileToBase64 = async (file) =>
+            new Promise((resolve, reject) => {
+                const reader = new FileReader()
+                reader.readAsDataURL(file)
+                reader.onload = () => resolve(reader.result)
+                reader.onerror = (e) => reject(e)
+            })
+
+        function isImage(file) {
+            return !!file.type.match('image.*');
+        }
+        //#endregion
+
+        //#region Banner
+        document.getElementById('banner-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const file = document.getElementById("banner").files[0];
+            if(!isImage(file)) {
+                return alert("Not supported file type!");
+            }
+            const imageStr = await fileToBase64(file);
+            fetch('/api/user/banner', { method: 'POST', body: JSON.stringify({id: id, img: imageStr}) })
+            alert("Success!")
+        })
+        //#endregion
+
+        //#region Avatar
+        document.getElementById('avatar-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const file = document.getElementById("file").files[0];
+            if(!isImage(file)) {
+                return alert("Not supported file type!");
+            }
+            const imageStr = await fileToBase64(file);
+            fetch('/api/user/avatar', { method: 'POST', body: JSON.stringify({id: id, img: imageStr}) })
+            alert("Success!")
+        })
+        //#endregion
+
+        //#region Name
+        document.getElementById('name-form').addEventListener('submit', async (e) => {
+            e.preventDefault()
+            const newUsername = document.getElementById("username").value;
+            if(!newUsername || newUsername === username) {
+                return alert("Username must be different or not null!!");
+            }
+            fetch('/api/user/name', { method: 'POST', body: JSON.stringify({ id: id, username: newUsername }) })
+            alert("Success!")
+        })
+        //#endregion
+    })
+    //#endregion
 </script>
 
+<svelte:head>
+    <title>{username}</title>
+</svelte:head>
+
 <main>
-    <div class="h-full flex justify-center">
+    <div class="h-full min-h-screen flex justify-center">
         <div
-                class="bg-white shadow-2xl max-w-9xl w-9/12 m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 max-h-full h-full"
+                class="bg-white shadow-2xl max-w-full md:w-9/12 w-full m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
         >
-            <div class="max-h-64 relative inline-block overflow-hidden border-b border-black">
-                <span class="z-50 absolute text-7xl text-white text-shadow-max center">{username}</span>
+            <div class="max-h-64 relative flex justify-center items-center rounded-t-xl overflow-hidden border-b border-black">
+                <span class="z-50 absolute text-7xl text-white text-shadow-max center"><img src="/user/avatar/{id}.png" id="user-avatar" onerror="this.src = '/user/avatar/__default.png'" alt="avatar" class="rounded-full w-40 h-auto shadow-xl" /></span>
                 <img
+                        id="user-banner"
                         src="/user/banner/{id}.png"
                         alt="banner"
-                        class="rounded-t-xl w-full transition-all duration-100 darken-image"
+                        class="rounded-t-xl w-full min-w-full overflow-hidden min-h-full flex-shrink-0 max-w-none transition-all duration-100 darken-image"
+                        onerror="this.src = '/user/banner/__default.png'"
                 />
             </div>
-            <h1 class="text-6xl font-bold text-center m-6 border-t p-4">Terms of Services</h1>
-            <div class="privacy">
-                <h1>Website Terms and Conditions of Use</h1>
-
-                <h2>1. Terms</h2>
-
-                <p>
-                    By accessing this Website, accessible from https://arphros.ddns.net/, you are agreeing to
-                    be bound by these Website Terms and Conditions of Use and agree that you are responsible
-                    for the agreement with any applicable local laws. If you disagree with any of these terms,
-                    you are prohibited from accessing this site. The materials contained in this Website are
-                    protected by copyright and trade mark law.
-                </p>
-
-                <h2>2. Use License</h2>
-
-                <p>
-                    Permission is granted to temporarily download one copy of the materials on Arphros's
-                    Website for personal, non-commercial transitory viewing only. This is the grant of a
-                    license, not a transfer of title, and under this license you may not:
-                </p>
-
-                <ul>
-                    <li>modify or copy the materials;</li>
-                    <li>use the materials for any commercial purpose or for any public display;</li>
-                    <li>attempt to reverse engineer any software contained on Arphros's Website;</li>
-                    <li>remove any copyright or other proprietary notations from the materials; or</li>
-                    <li>
-                        transferring the materials to another person or "mirror" the materials on any other
-                        server.
-                    </li>
-                </ul>
-
-                <p>
-                    This will let Arphros to terminate upon violations of any of these restrictions. Upon
-                    termination, your viewing right will also be terminated and you should destroy any
-                    downloaded materials in your possession whether it is printed or electronic format. These
-                    Terms of Service has been created with the help of the <a
-                        href="https://www.termsofservicegenerator.net">Terms Of Service Generator</a
-                >.
-                </p>
-
-                <h2>3. Disclaimer</h2>
-
-                <p>
-                    All the materials on Arphros’s Website are provided "as is". Arphros makes no warranties,
-                    may it be expressed or implied, therefore negates all other warranties. Furthermore,
-                    Arphros does not make any representations concerning the accuracy or reliability of the
-                    use of the materials on its Website or otherwise relating to such materials or any sites
-                    linked to this Website.
-                </p>
-
-                <h2>4. Limitations</h2>
-
-                <p>
-                    Arphros or its suppliers will not be hold accountable for any damages that will arise with
-                    the use or inability to use the materials on Arphros’s Website, even if Arphros or an
-                    authorize representative of this Website has been notified, orally or written, of the
-                    possibility of such damage. Some jurisdiction does not allow limitations on implied
-                    warranties or limitations of liability for incidental damages, these limitations may not
-                    apply to you.
-                </p>
-
-                <h2>5. Revisions and Errata</h2>
-
-                <p>
-                    The materials appearing on Arphros’s Website may include technical, typographical, or
-                    photographic errors. Arphros will not promise that any of the materials in this Website
-                    are accurate, complete, or current. Arphros may change the materials contained on its
-                    Website at any time without notice. Arphros does not make any commitment to update the
-                    materials.
-                </p>
-
-                <h2>6. Links</h2>
-
-                <p>
-                    Arphros has not reviewed all of the sites linked to its Website and is not responsible for
-                    the contents of any such linked site. The presence of any link does not imply endorsement
-                    by Arphros of the site. The use of any linked website is at the user’s own risk.
-                </p>
-
-                <h2>7. Site Terms of Use Modifications</h2>
-
-                <p>
-                    Arphros may revise these Terms of Use for its Website at any time without prior notice. By
-                    using this Website, you are agreeing to be bound by the current version of these Terms and
-                    Conditions of Use.
-                </p>
-
-                <h2>8. Your Privacy</h2>
-
-                <p>
-                    Please read our <a class="text-blue-600 hover:underline" href="privacy">Privacy Policy</a
-                >.
-                </p>
-
-                <h2>9. Governing Law</h2>
-
-                <p>
-                    Any claim related to Arphros's Website shall be governed by the laws of <a
-                        class="text-blue-600 hover:underline"
-                        href="https://en.wikipedia.org/wiki/Law_of_Thailand">Thailand</a
-                > without regards to its conflict of law provisions.
-                </p>
+            <h1 class="text-6xl font-bold text-center m-6 border-b p-4">{username}</h1>
+            <div class="flex md:flex-row flex-col border-b">
+                <div class="h-full w-full">
+                    <h1 class="text-center font-bold text-3xl m-4 p-2">Badges</h1>
+                    <div class="flex flex-row m-4 gap-2 space-x-2 justify-evenly flex-wrap">
+                    {#each info.badges as badge}
+                        <img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt="{badge}">
+                    {/each}
+                    </div>
+                </div>
+                <div class="h-full w-full md:relative m-4 flex flex-col space-y-2">
+                    <h1 class="text-center font-bold text-3xl m-4 p-2">Info</h1>
+                    <h1 class="text-2xl">Coins: <span class="absolute right-4">{info.coins} coin(s)</span></h1>
+                    <h1 class="text-2xl">Tickets: <span class="absolute right-4">{info.ticket} ticket(s)</span></h1>
+                    <h1 class="text-2xl">Levels: <span class="absolute right-4">{info.levels} level(s)</span></h1>
+                    <h1 class="text-2xl">Exp: <span class="absolute right-4">{info.exp} exp(s)</span></h1>
+                    <h1 class="text-2xl">Play count: <span class="absolute right-4">{info.playCount} time(s)</span></h1>
+                    <h1 class="text-2xl">Replay watch: <span class="absolute right-4">{info.replayWatch} time(s)</span></h1>
+                </div>
+            </div>
+            <div class="h-full w-full m-3 flex justify-center relative border-b p-3">
+                <div class="wrapper w-9/12">
+                    <h1 class="text-4xl font-bold relative">About Me</h1>
+                    <span class="absolute top-2 right-10 bg-blue-500 p-2 text-white rounded-lg backdrop-filter cursor-pointer backdrop-blur-xl" on:click={() => window.location.href = "/profile/about"}>Edit</span>
+                        <div id="aboutme" class="container max-w-full max-h-96 mt-6 overflow-scroll border-2 border-black p-2 shadow-xl rounded-lg">
+                        </div>
+                </div>
+            </div>
+            <div class="h-full w-full m-6 flex flex-row justify-left relative">
+                <div class="wrapper">
+                    <h1 class="font-bold text-4xl">Settings</h1>
+                    <div class="space-y-4 flex flex-col">
+                        <div class="flex flex-col p-3">
+                            <form id="name-form" method="post">
+                                <label for="username" class="text-2xl">Change username:</label><br>
+                                <input type="text" name="username" id="username" placeholder="Enter new username..." class="focus:outline-none focus:ring ring-blue-500 ring-offset-2 rounded-sm border transition duration-200" />
+                                <h1 class="text-gray-400">[ Require 200 tickets ]</h1>
+                            </form>
+                        </div>
+                        <div class="flex flex-col p-3">
+                            <form id="avatar-form" action="/api/user/avatar" class="space-y-3" method="post">
+                                <label for="file" class="text-2xl">Change avatar:</label><br>
+                                <input type="file" name="avatar" id="file" /><br>
+                                <input type="submit" value="Submit" class="p-1 rounded-md text-white bg-green-500 cursor-pointer" />
+                            </form>
+                        </div>
+                        <div class="flex flex-col p-3">
+                            <form id="banner-form" class="space-y-3" method="post">
+                                <label for="username" class="text-2xl">Change banner:</label><br>
+                                <input type="file" name="banner" id="banner" /><br>
+                                <input type="submit" value="Submit" class="p-1 rounded-md text-white bg-green-500 cursor-pointer" />
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

@@ -5,7 +5,7 @@ export const post = async (req) => {
 	const username = req.body.get('username');
 	const email = req.body.get('email');
 	const password = req.body.get('password');
-	const hashPassword = bcrypt.hashSync(password, 32);
+	const hashPassword = bcrypt.hashSync(password, 10);
 
 
 	if (!username || !email || !password) {
@@ -29,10 +29,7 @@ export const post = async (req) => {
 		});
 
 	return {
-		body: {
-			message: 'success'
-		},
-		headers: { Location: `/login` },
-		status: 200
+		headers: { Location: `/auth/login` },
+		status: 302
 	};
 };
