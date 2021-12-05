@@ -1,14 +1,14 @@
 <script>
-    //#region Modules
+	//#region Modules
 	import { onMount } from 'svelte';
-    //#endregion
+	//#endregion
 
-    //#region Variable
+	//#region Variable
 	let status;
 	let msg;
-    //#endregion
+	//#endregion
 
-    //#region On Mount
+	//#region On Mount
 	onMount(() => {
 		const queryString = window.location.search;
 		const urlParams = new URLSearchParams(queryString);
@@ -17,7 +17,7 @@
 		status = statusParam;
 		msg = msgParam;
 	});
-    //#endregion 
+	//#endregion
 </script>
 
 <main>

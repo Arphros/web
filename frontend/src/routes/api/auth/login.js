@@ -7,16 +7,14 @@ export const post = async (req) => {
 	const username = req.body.get('username');
 	const password = req.body.get('password');
 
-	let rows = await db.execute('SELECT * FROM user WHERE username = ?', [
-		username,
-	]);
+	let rows = await db.execute('SELECT * FROM user WHERE username = ?', [username]);
 	if (!rows[0][0]) {
 		return {
 			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credentials` },
 			status: 300
 		};
 	}
-	const isPassCorrect = await bcrypt.compareSync(password, rows[0][0].password)
+	const isPassCorrect = await bcrypt.compareSync(password, rows[0][0].password);
 	if (isPassCorrect === false) {
 		return {
 			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credenticals` },
@@ -27,15 +25,19 @@ export const post = async (req) => {
 	rows = await db.execute('SELECT id FROM user WHERE username = ?', [username]);
 	const sessionId = uuidv4();
 
-	let sessionFinding = await db.execute('SELECT * FROM session WHERE id = ?', [rows[0][0].id])
-	if(sessionFinding[0][0]) {
-		if(Date.now() - sessionFinding[0][0].timestamp > 604800000) {
+	let sessionFinding = await db.execute('SELECT * FROM session WHERE id = ?', [rows[0][0].id]);
+	if (sessionFinding[0][0]) {
+		if (Date.now() - sessionFinding[0][0].timestamp > 604800000) {
 			await db.execute('DELETE FROM session WHERE id = ?', [rows[0][0].id]);
 		}
 	}
 
-	if(!sessionFinding[0][0]) {
-		await db.execute('INSERT INTO session (session, id, timestamp) VALUES (?, ?, ?)', [sessionId, rows[0][0].id, Date.now()]);
+	if (!sessionFinding[0][0]) {
+		await db.execute('INSERT INTO session (session, id, timestamp) VALUES (?, ?, ?)', [
+			sessionId,
+			rows[0][0].id,
+			Date.now()
+		]);
 	}
 
 	const headers = {
@@ -45,11 +47,11 @@ export const post = async (req) => {
 			maxAge: 60 * 60 * 24 * 7,
 			path: '/'
 		}),
-		'Location': '/'
+		Location: '/'
 	};
 
 	return {
 		status: 302,
-		headers,
+		headers
 	};
 };

@@ -7,21 +7,21 @@ export const handle = async ({ request, resolve }) => {
 	request.locals.user = cookies;
 
 	if (!cookies.session_id) {
-		request.locals.user.authenticated = false
+		request.locals.user.authenticated = false;
 	} else {
-		request.locals.user.authenticated = true
-		let rows = await db.execute("SELECT * FROM session WHERE session = ?", [cookies.session_id]);
-		rows = await db.execute("SELECT * FROM user WHERE id = ?", [rows[0][0].id]);
+		request.locals.user.authenticated = true;
+		let rows = await db.execute('SELECT * FROM session WHERE session = ?', [cookies.session_id]);
+		rows = await db.execute('SELECT * FROM user WHERE id = ?', [rows[0][0].id]);
 		request.locals.user.id = rows[0][0].id;
 		request.locals.user.username = rows[0][0].username;
 		request.locals.user.info = JSON.parse(rows[0][0].info);
 		request.locals.user.about = rows[0][0].about;
 	}
 
-		const res = await resolve(request);
-		return {
-			...res
-		}
+	const res = await resolve(request);
+	return {
+		...res
+	};
 };
 
 export const getSession = async (request) => {

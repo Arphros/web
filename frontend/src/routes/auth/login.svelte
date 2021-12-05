@@ -1,8 +1,8 @@
 <script context="module">
-    export async function load({ session }) {
+	export async function load({ session }) {
 		if (session.authenticated === true) {
 			return {
-                status: 302,
+				status: 302,
 				redirect: '/profile'
 			};
 		} else {
@@ -10,12 +10,13 @@
 				props: {
 					isAuth: false
 				}
-			}
+			};
 		}
 	}
 </script>
+
 <script lang="ts">
-	export let isAuth
+	export let isAuth;
 </script>
 
 <svelte:head>
