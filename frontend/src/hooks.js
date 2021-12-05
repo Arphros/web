@@ -14,6 +14,8 @@ export const handle = async ({ request, resolve }) => {
 		rows = await db.execute("SELECT * FROM user WHERE id = ?", [rows[0][0].id]);
 		request.locals.user.id = rows[0][0].id;
 		request.locals.user.username = rows[0][0].username;
+		request.locals.user.info = JSON.parse(rows[0][0].info);
+		request.locals.user.about = rows[0][0].about;
 	}
 
 		const res = await resolve(request);
@@ -32,6 +34,8 @@ export const getSession = async (request) => {
 	return {
 		authenticated: true,
 		id: request.locals.user.id,
-		username: request.locals.user.username
+		username: request.locals.user.username,
+		info: request.locals.user.info,
+		about: request.locals.user.about
 	};
 };

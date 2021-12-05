@@ -22,8 +22,6 @@ export const post = async (req) => {
 			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credenticals` },
 			status: 300
 		};
-	} else {
-		console.log('nci')
 	}
 
 	rows = await db.execute('SELECT id FROM user WHERE username = ?', [username]);

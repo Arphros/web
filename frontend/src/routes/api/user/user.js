@@ -1,4 +1,4 @@
-import db from '$lib/database/database';
+import db from '$lib/database/database.js';
 import bcrypt from 'bcrypt';
 
 export const post = async ( req ) => {
@@ -11,7 +11,7 @@ export const post = async ( req ) => {
         };
     }
     let rows = await db
-        .execute('SELECT username, id, info FROM user WHERE id = ?', [
+        .execute('SELECT username, id, info, about FROM user WHERE id = ?', [
             id
         ])
         .catch((err) => {

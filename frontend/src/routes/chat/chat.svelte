@@ -1,3 +1,22 @@
+<script context="module">
+	//#region Load session
+	export async function load({ session }) {
+		if (session.authenticated === true) {
+			return {
+				props: {
+					username: session.username,
+					id: session.id
+				}
+			}
+		} else {
+			return {
+				status: 302,
+				redirect: '/auth/login'
+			};
+		}
+	}
+	//#endregion
+</script>
 <script lang="ts">
 	//#region modules
 	import { onMount } from 'svelte';
@@ -9,6 +28,8 @@
 	let cooldown = 450;
 	let connectionState;
 	let lastMessageTime;
+	export let username;
+	export let id;
 	//#endregion
 
     //#region On mount
@@ -36,6 +57,9 @@
 			username.className = 'font-bold inline-block';
 			const img = document.createElement('img');
 			img.src = msg.uid ? `/user/avatar/${msg.uid}.png` : `/user/avatar/__default.png`;
+			if(img.height === 0) {
+				img.src = `/user/avatar/__default.png`
+			}
 			img.className = 'rounded-full inline-block mx-2';
 			img.width = 30;
 			img.alt = 'avatar';
@@ -87,8 +111,8 @@
 
 			socket.emit("chat message",
 				{
-					username: 'Anonymous',
-					uid: '',
+					username: username,
+					uid: id,
 					timestamp: new Date().toLocaleString(),
 					content: msgVal
 				}
@@ -126,7 +150,7 @@
 					: 'User disconnected!'
                 } <br />
 			</h1>
-					<div class="container max-h-full overflow-scroll" id="msg-container" />
+					<div class="container max-h-full overflow-scroll" id="msg-container"></div>
 			<form class="w-full h-full" id="msg-form">
 				<div class="relative">
 					<input

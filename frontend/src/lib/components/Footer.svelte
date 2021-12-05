@@ -33,4 +33,7 @@
 			</div>
 		</div>
 	</div>
+	<h1 class="absolute bottom-0 right-2">
+		Development Version 1-alpha
+	</h1>
 </nav>

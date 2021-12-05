@@ -55,6 +55,69 @@ nav {
 	@apply leading-relaxed;
 }
 
+#aboutme h1 {
+	@apply font-bold text-6xl border-b leading-relaxed;
+}
+
+#aboutme h2 {
+	@apply font-bold text-5xl border-b leading-relaxed
+}
+
+#aboutme h3 {
+	@apply font-bold text-4xl border-b leading-relaxed
+}
+
+#aboutme h4 {
+	@apply font-bold text-3xl
+}
+
+#aboutme h5 {
+	@apply font-bold text-2xl
+}
+
+#aboutme h6 {
+	@apply font-bold text-xl
+}
+
+#aboutme ul {
+	@apply list-disc
+}
+
+#aboutme ol {
+	@apply list-decimal
+}
+
+#aboutme blockquote {
+	margin: 0;
+}
+
+#aboutme blockquote p {
+	padding: 15px;
+	background: #eee;
+	border-radius: 5px;
+}
+
+#aboutme blockquote p::before {
+	content: '\201C';
+}
+
+#aboutme blockquote p::after {
+	content: '\201D';
+}
+
+#aboutme pre {
+	background: #eee;
+	@apply p-2
+}
+
+#aboutme code {
+	background: #eee;
+}
+
+#aboutme table, td, tr, thead, tbody {
+	@apply border-2 border-black
+}
+
 .privacy h1,
 h2,
 h3,

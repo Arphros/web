@@ -64,7 +64,7 @@
 			<h1 class="md:text-6xl text-2xl font-bold text-center m-6 border-t p-4">
 				Why should you support us?
 			</h1>
-			<div class="grid grid-flow-cols place-items-center grid-cols-2 m-4 gap-3">
+			<div class="grid grid-flow-cols place-items-center md:grid-cols-2 grid-cols-1 m-4 gap-3">
 				<div class="relative">
 					<img
 						src="/assets/examples/gameplay_ex.png"
@@ -98,7 +98,7 @@
 				</div>
 			</div>
 			<h1 class="md:text-6xl text-2xl font-bold text-center m-6 border-t p-4">There's more!</h1>
-			<div class="grid grid-flow-cols place-items-center grid-cols-2 m-4 gap-3">
+			<div class="grid grid-flow-cols place-items-center md:grid-cols-2 grid-cols-1 m-4 gap-3">
 				<div class="relative">
 					<img
 						src="/assets/examples/chat_ex.png"
