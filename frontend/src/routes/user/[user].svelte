@@ -16,10 +16,9 @@
     //#region onMount
     onMount(async () => {
         //#region Fetch data
-        let rawData = await fetch('http://localhost:3000/api/user/user', { method: "POST", body: JSON.stringify({ id: user }) })
+        let rawData = await fetch('/api/user/user', { method: "POST", body: JSON.stringify({ id: user }) })
         let data = await rawData.json();
 
-        console.log(rawData)
         username = data.user.username
         about = data.user.about
         info = JSON.parse(data.user.info);
