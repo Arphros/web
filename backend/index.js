@@ -5,7 +5,7 @@ const server = http.createServer(app);
 
 const port = process.env.PORT || 5000;
 server.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+    console.log(`Listening on port ${port}`);
 });
 
 const cors = require("cors");
@@ -22,13 +22,13 @@ app.use(express.json());
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors: {
-      origin: "*",
-      methods: ["GET", "POST", "PUT", "DELETE"],
+        origin: "*",
+        methods: ["GET", "POST", "PUT", "DELETE"],
     }
 });
 
 io.on("connection", (socket) => {
-  socket.on("chat message", (data) => {
-    io.emit("message list", data);
-  });
+    socket.on("chat message", (data) => {
+        io.emit("message list", data);
+    });
 });

@@ -44,26 +44,28 @@
 			class="bg-white shadow-2xl max-w-full md:w-9/12 w-full m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
 		>
 			<div
-				class="max-h-64 relative flex justify-center items-center rounded-t-xl overflow-hidden border-b border-black"
+					class="max-h-72 h-full grid grid-cols-1 place-items-center static transition duration-300 justify-center items-center rounded-t-xl overflow-y-scroll border-b border-black"
+					id="bannerContainer"
 			>
-				<span class="z-50 absolute text-7xl text-white text-shadow-max center"
-					><img
+				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
+				><img
 						src="/user/avatar/{user}.png"
 						id="user-avatar"
 						onerror="this.src = '/user/avatar/__default.png'"
 						alt="avatar"
-						class="rounded-full w-40 h-auto shadow-xl"
-					/></span
+						class="rounded-full w-40 h-auto"
+				/></span
 				>
 				<img
-					id="user-banner"
-					src="/user/banner/{user}.png"
-					alt="banner"
-					class="rounded-t-xl w-full min-w-full overflow-hidden min-h-full flex-shrink-0 max-w-none transition-all duration-100 darken-image"
-					onerror="this.src = '/user/banner/__default.png'"
+						id="user-banner"
+						src="/user/banner/{user}.png"
+						alt="banner"
+						class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
+						onerror="this.src = '/user/banner/__default.png'"
 				/>
 			</div>
-			<h1 class="text-6xl font-bold text-center m-6 border-b p-4">{username}</h1>
+			<h1 class="text-6xl font-bold text-center p-4">{username}</h1>
+			<h1 class="text-xl font-bold text-gray-400 text-center border-b mb-2">#{user}</h1>
 			<div class="flex md:flex-row flex-col border-b">
 				<div class="h-full w-full">
 					<h1 class="text-center font-bold text-3xl m-4 p-2">Badges</h1>

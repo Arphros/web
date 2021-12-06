@@ -22,16 +22,16 @@
 	<div class="flex gap-3 w-full">
 		<div class="text-center text-sm w-full">
 			<div class="flex justify-center align-middle mb-1 flex-row space-x-4">
-				<a href="/docs/api"><h1 class="text-center">Developers</h1></a>
-				<a href="/about/terms"><h1>Terms of Services</h1></a>
-				<a href="/about/privacy"><h1>Privacy Policy</h1></a>
-				<a href="/about/copyright"><h1>Copyright (DMCA)</h1></a>
+				<a href="/docs/api"><h1 class="text-center">API</h1></a>
+				<a href="/about/terms"><h1>ToS</h1></a>
+				<a href="/about/privacy"><h1>Privacy</h1></a>
+				<a href="/about/copyright"><h1>Copyright</h1></a>
 				<a href="/about/teams"><h1>Teams</h1></a>
 			</div>
 			<div class="flex flex-row justify-center space-x-4">
-				<h1>© Tinvv & Arphros Teams 2020-2021</h1>
+				<h1>© Tinvv 2020-2021</h1>
 			</div>
 		</div>
 	</div>
-	<h1 class="absolute bottom-0 right-2">Development Version 1-alpha</h1>
+	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">Development Version 1-alpha</h1>
 </nav>

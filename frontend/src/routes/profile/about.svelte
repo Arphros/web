@@ -5,7 +5,8 @@
 			return {
 				props: {
 					id: session.id,
-					about: session.about
+					about: session.about,
+					info: session.info
 				}
 			};
 		} else {
@@ -28,6 +29,7 @@
 	//#region Variables
 	export let id;
 	export let about;
+	export let info;
 	//#endregion
 
 	//#region OnMount
@@ -36,6 +38,9 @@
 		document.getElementById('save').addEventListener('click', async (e) => {
 			e.preventDefault();
 			let value = document.getElementById('textarea').value;
+			if(!info.badges.includes("Supporter")) {
+				return alert("You need to be supporter to save!")
+			}
 			fetch('/api/user/about', { method: 'POST', body: JSON.stringify({ value: value, id: id }) })
 				.then((res) => res.json())
 				.then((data) => {
@@ -71,7 +76,7 @@
 					id="textarea"
 					cols="100"
 					rows="15"
-					class="m-4 p-4 focus:outline-none focus:ring ring-blue-500 ring-offset-2 rounded-lg transition duration-200 border"
+					class="m-4 p-4 focus:outline-none focus:ring ring-blue-500 ring-offset-2 rounded-lg transition duration-200 border border-black shadow-xl"
 					>{about}</textarea
 				>
 				<div class="flex justify-center space-x-2">

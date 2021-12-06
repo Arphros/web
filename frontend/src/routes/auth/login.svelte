@@ -39,6 +39,15 @@
 							name="username"
 						/>
 					</div>
+					<div class="email">
+						<label for="email">Email:</label>
+						<input
+								type="email"
+								class="border shadow-xl p-2 rounded-lg focus:outline-none focus:ring-2 ring-blue-400 ring-offset-2 transition-all duration-150 w-full"
+								placeholder="Email"
+								name="email"
+						/>
+					</div>
 					<div class="password">
 						<label for="username">Password:</label>
 						<input

@@ -29,6 +29,7 @@
 	let cooldown = 450;
 	let webSocketUrl = 'ws://arphros.ddns.net:5000/';
 	let connectionState;
+	let userOnline;
 	let lastMessageTime;
 	export let username;
 	export let id;
@@ -44,7 +45,7 @@
 		socket.on('disconnect', () => {
 			connectionState = socket.connected;
 		});
-		//#endregion
+			//#endregion
 
 		//#region On message
 		socket.on('message list', (msg) => {
@@ -56,14 +57,14 @@
 			msgBox.className = 'flex flex-col justify-end items-start relative';
 			const username = document.createElement('div');
 			username.className = 'font-bold inline-block';
+			const a = document.createElement('a')
+			a.href = msg.uid ? `/user/${id}` : ""
 			const img = document.createElement('img');
 			img.src = msg.uid ? `/user/avatar/${msg.uid}.png` : `/user/avatar/__default.png`;
-			if (img.height === 0) {
-				img.src = `/user/avatar/__default.png`;
-			}
 			img.className = 'rounded-full inline-block mx-2';
 			img.width = 30;
 			img.alt = 'avatar';
+			img.onerror = `/user/avatar/__default.png`;
 
 			const spanUsername = document.createElement('span');
 			spanUsername.innerText = msg.username;
@@ -78,7 +79,8 @@
 			spanUsername.appendChild(spanTimestamp);
 			username.appendChild(img);
 			username.appendChild(spanUsername);
-			msgBox.appendChild(username);
+			a.appendChild(username)
+			msgBox.appendChild(a);
 			msgBox.appendChild(message);
 			msgWrapper.appendChild(msgBox);
 
@@ -140,7 +142,7 @@
 				{channelName}
 			</h1>
 			<h1 class="text-{connectionState === true ? 'green' : 'red'}-500 text-lg">
-				{connectionState === true ? 'User connected!' : 'User disconnected!'} <br />
+				{connectionState === true ? 'User connected!' : 'User disconnected!'}<br />
 			</h1>
 			<div class="container max-h-full overflow-scroll" id="msg-container" />
 			<form class="w-full h-full" id="msg-form">

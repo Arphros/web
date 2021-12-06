@@ -10,7 +10,15 @@ export const post = async (req) => {
 	if (!username || !email || !password) {
 		return {
 			headers: { Location: `/errorHandler?status=300&msg=Missing%20required%20field` },
-			status: 300
+			status: 302
+		};
+	}
+
+	let rows = await db.execute('SELECT id FROM user WHERE email = ?', [email]);
+	if(rows[0][0]) {
+		return {
+			headers: { Location: `/errorHandler?status=300&msg=Email is already taken` },
+			status: 302
 		};
 	}
 
@@ -23,7 +31,7 @@ export const post = async (req) => {
 		.catch((err) => {
 			return {
 				headers: { Location: `/errorHandler?status=300&msg=${err.sqlMessage}` },
-				status: 300
+				status: 302
 			};
 		});
 

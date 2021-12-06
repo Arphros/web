@@ -10,11 +10,29 @@ export const post = async (req) => {
 			status: 300
 		};
 	}
-	let rows = await db
+	let rows;
+	rows = await db.execute("SELECT info FROM user WHERE id = ?", [id]);
+
+	let userInfo = rows[0][0].info
+	let ticket = parseInt(JSON.parse(rows[0][0].info).ticket);
+	let JSONData = userInfo.ticket = (parseInt(JSON.parse(rows[0][0].info)) - 200).toString();
+	if(ticket < 200) {
+		return {
+			body: {
+				message: "Not enough tickets!"
+			},
+			status: 300
+		};
+	} else {
+		await db.execute('UPDATE user SET info = ? WHERE id = ?', [JSONData, id])
+	}
+	await db
 		.execute('UPDATE user SET username = ? WHERE id = ?', [username, id])
 		.catch((err) => {
 			return {
-				headers: { Location: `/errorHandler?status=300&msg=${err.sqlMessage}` },
+				body: {
+					message: "Database error!"
+				},
 				status: 300
 			};
 		});

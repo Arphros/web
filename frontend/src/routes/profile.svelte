@@ -7,7 +7,7 @@
 					username: session.username,
 					id: session.id,
 					info: session.info,
-					about: session.about
+					about: session.about,
 				}
 			};
 		} else {
@@ -57,16 +57,18 @@
 		//#region Banner
 		document.getElementById('banner-form').addEventListener('submit', async (e) => {
 			e.preventDefault();
+			if(!info.badges.includes("Supporter")) {
+				return alert("You need beta tester role to change banner!")
+			}
 			const file = document.getElementById('banner').files[0];
 			if (!isImage(file)) {
 				return alert('Not supported file type!');
 			}
 			const imageStr = await fileToBase64(file);
-			fetch('/api/user/banner', {
+			await fetch('/api/user/banner', {
 				method: 'POST',
 				body: JSON.stringify({ id: id, img: imageStr })
-			});
-			alert('Success!');
+			})
 		});
 		//#endregion
 
@@ -92,12 +94,31 @@
 			const newUsername = document.getElementById('username').value;
 			if (!newUsername || newUsername === username) {
 				return alert('Username must be different or not null!!');
+			} else if(newUsername.length > 30) {
+				return alert('Username length should less than 30 characters!')
+			} else if (parseInt(info.ticket) < 200) {
+				return alert("Not enough money!")
 			}
 			fetch('/api/user/name', {
 				method: 'POST',
 				body: JSON.stringify({ id: id, username: newUsername })
 			});
 			alert('Success!');
+		});
+		//#endregion
+
+		//#region Name
+		document.getElementById('logout-form').addEventListener('submit', async (e) => {
+			e.preventDefault();
+			let confirmation = confirm("Are you sure you want to logout?")
+			if(confirmation) {
+				fetch('/api/auth/logout', {
+					method: 'POST',
+					body: JSON.stringify({id: id})
+				});
+				alert('Success!');
+				window.location.href = '/auth/login'
+			}
 		});
 		//#endregion
 	});
@@ -111,29 +132,31 @@
 <main>
 	<div class="h-full min-h-screen flex justify-center">
 		<div
-			class="bg-white shadow-2xl max-w-full md:w-9/12 w-full m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
+			class="bg-white relative shadow-2xl md:w-9/12 md:m-6 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
 		>
 			<div
-				class="max-h-64 relative flex justify-center items-center rounded-t-xl overflow-hidden border-b border-black"
+				class="max-h-72 h-full grid grid-cols-1 place-items-center static transition duration-300 justify-center items-center rounded-t-xl overflow-y-scroll border-b border-black"
+				id="bannerContainer"
 			>
-				<span class="z-50 absolute text-7xl text-white text-shadow-max center"
+				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
 					><img
 						src="/user/avatar/{id}.png"
 						id="user-avatar"
 						onerror="this.src = '/user/avatar/__default.png'"
 						alt="avatar"
-						class="rounded-full w-40 h-auto shadow-xl"
+						class="rounded-full w-40 h-auto"
 					/></span
 				>
 				<img
 					id="user-banner"
 					src="/user/banner/{id}.png"
 					alt="banner"
-					class="rounded-t-xl w-full min-w-full overflow-hidden min-h-full flex-shrink-0 max-w-none transition-all duration-100 darken-image"
+					class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
 					onerror="this.src = '/user/banner/__default.png'"
 				/>
 			</div>
-			<h1 class="text-6xl font-bold text-center m-6 border-b p-4">{username}</h1>
+			<h1 class="text-6xl font-bold text-center p-4">{username}</h1>
+			<h1 class="text-xl font-bold text-gray-400 text-center border-b mb-2">#{id}</h1>
 			<div class="flex md:flex-row flex-col border-b">
 				<div class="h-full w-full">
 					<h1 class="text-center font-bold text-3xl m-4 p-2">Badges</h1>
@@ -172,8 +195,7 @@
 					>
 					<div
 						id="aboutme"
-						class="container max-w-full max-h-96 mt-6 overflow-scroll border-2 border-black p-2 shadow-xl rounded-lg"
-					/>
+						class="container max-w-full max-h-96 mt-6 overflow-scroll border-2 border-black p-2 shadow-xl rounded-lg"></div>
 				</div>
 			</div>
 			<div class="h-full w-full m-6 flex flex-row justify-left relative">
@@ -181,14 +203,14 @@
 					<h1 class="font-bold text-4xl">Settings</h1>
 					<div class="space-y-4 flex flex-col">
 						<div class="flex flex-col p-3">
-							<form id="name-form" method="post">
+							<form id="name-form" class="space-y-3" method="post">
 								<label for="username" class="text-2xl">Change username:</label><br />
 								<input
 									type="text"
 									name="username"
 									id="username"
 									placeholder="Enter new username..."
-									class="focus:outline-none focus:ring ring-blue-500 ring-offset-2 rounded-sm border transition duration-200"
+									class="focus:outline-none p-1 focus:ring ring-blue-500 ring-offset-2 rounded-sm border transition duration-200 border-black rounded-md "
 								/>
 								<h1 class="text-gray-400">[ Require 200 tickets ]</h1>
 							</form>
@@ -212,6 +234,16 @@
 									type="submit"
 									value="Submit"
 									class="p-1 rounded-md text-white bg-green-500 cursor-pointer"
+								/>
+							</form>
+						</div>
+						<div class="flex flex-col p-3">
+							<form id="logout-form" class="space-y-3" method="post">
+								<label for="login" class="text-2xl text-red-500">Logout of the account</label><br />
+								<input
+										type="submit"
+										value="Logout"
+										class="p-1 rounded-md text-white bg-red-500 cursor-pointer"
 								/>
 							</form>
 						</div>
