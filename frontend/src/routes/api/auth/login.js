@@ -10,14 +10,18 @@ export const post = async (req) => {
 	let rows = await db.execute('SELECT * FROM user WHERE username = ?', [username]);
 	if (!rows[0][0]) {
 		return {
-			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credentials` },
+			body: {
+				message: "Invalid Credentials"
+			},
 			status: 300
 		};
 	}
 	const isPassCorrect = await bcrypt.compareSync(password, rows[0][0].password);
 	if (isPassCorrect === false) {
 		return {
-			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credenticals` },
+			body: {
+				message: "Invalid Credentials"
+			},
 			status: 300
 		};
 	}
