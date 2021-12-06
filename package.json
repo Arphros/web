@@ -7,6 +7,7 @@
   "author": "ArprhosTeam",
   "license": "Apache-2.0",
   "dependencies": {
+    "@sveltejs/adapter-vercel": "^1.0.0-next.31",
     "autoprefixer": "^10.4.0",
     "chart.js": "^3.6.0",
     "cors": "^2.8.5",
