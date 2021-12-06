@@ -7,7 +7,7 @@
 					username: session.username,
 					id: session.id
 				}
-			}
+			};
 		} else {
 			return {
 				status: 302,
@@ -17,37 +17,38 @@
 	}
 	//#endregion
 </script>
+
 <script lang="ts">
 	//#region modules
 	import { onMount } from 'svelte';
-    import { io } from "socket.io-client"
-    //#endregion
+	import { io } from 'socket.io-client';
+	//#endregion
 
 	//#region variables
 	let channelName = '#Lobby';
 	let cooldown = 450;
+	let webSocketUrl = 'ws://arphros.ddns.net:5000/';
 	let connectionState;
 	let lastMessageTime;
 	export let username;
 	export let id;
 	//#endregion
 
-    //#region On mount
+	//#region On mount
 	onMount(() => {
-		const socket = io('ws://localhost:5000/');
-        //#region On connection close, open
+		const socket = io(webSocketUrl);
+		//#region On connection close, open
 		socket.on('connect', () => {
 			connectionState = socket.connected;
 		});
 		socket.on('disconnect', () => {
 			connectionState = socket.connected;
 		});
-        //#endregion
-		
-        //#region On message 
-        socket.on('message list', (msg) => {
-            
-            //#region Add element
+		//#endregion
+
+		//#region On message
+		socket.on('message list', (msg) => {
+			//#region Add element
 			const msgWrapper = document.createElement('div');
 			msgWrapper.className =
 				'p-2 mx-3 my-4 message-wrapper border border-black shadow-xl rounded-lg align-middle';
@@ -57,8 +58,8 @@
 			username.className = 'font-bold inline-block';
 			const img = document.createElement('img');
 			img.src = msg.uid ? `/user/avatar/${msg.uid}.png` : `/user/avatar/__default.png`;
-			if(img.height === 0) {
-				img.src = `/user/avatar/__default.png`
+			if (img.height === 0) {
+				img.src = `/user/avatar/__default.png`;
 			}
 			img.className = 'rounded-full inline-block mx-2';
 			img.width = 30;
@@ -84,13 +85,13 @@
 			document.getElementById('msg-container').appendChild(msgWrapper);
 			const msgWrapperBox = document.querySelectorAll('.message-wrapper');
 			msgWrapperBox[msgWrapperBox.length - 1].scrollIntoView({ behavior: 'smooth' });
-            //#endregion
+			//#endregion
 		});
-        //#endregion
-		
-        //#region Form handling
-        document.getElementById('msg-form').onsubmit = async (e) => {
-            //#region message handling
+		//#endregion
+
+		//#region Form handling
+		document.getElementById('msg-form').onsubmit = async (e) => {
+			//#region message handling
 			e.preventDefault();
 			if (connectionState === false) return;
 			let msg = document.getElementById('msg-input') as HTMLInputElement;
@@ -109,21 +110,19 @@
 				return;
 			}
 
-			socket.emit("chat message",
-				{
-					username: username,
-					uid: id,
-					timestamp: new Date().toLocaleString(),
-					content: msgVal
-				}
-			);
+			socket.emit('chat message', {
+				username: username,
+				uid: id,
+				timestamp: new Date().toLocaleString(),
+				content: msgVal
+			});
 			lastMessageTime = Date.now();
 			msg.value = '';
-            //#endregion
+			//#endregion
 		};
-        //#endregion
+		//#endregion
 	});
-    //#endregion
+	//#endregion
 </script>
 
 <svelte:head>
@@ -140,31 +139,24 @@
 			>
 				{channelName}
 			</h1>
-			<h1
-				class="text-{connectionState === true
-					? 'green' 
-					: 'red'}-500 text-lg"
-			>
-				{connectionState === true 
-					? 'User connected!'
-					: 'User disconnected!'
-                } <br />
+			<h1 class="text-{connectionState === true ? 'green' : 'red'}-500 text-lg">
+				{connectionState === true ? 'User connected!' : 'User disconnected!'} <br />
 			</h1>
-					<div class="container max-h-full overflow-scroll" id="msg-container"></div>
+			<div class="container max-h-full overflow-scroll" id="msg-container" />
 			<form class="w-full h-full" id="msg-form">
 				<div class="relative">
 					<input
-							autocomplete="off"
-							type="text"
-							name="msg"
-							id="msg-input"
-							class="w-full rounded-r-md border focus:outline-none p-2"
-							placeholder="Enter your message..."
+						autocomplete="off"
+						type="text"
+						name="msg"
+						id="msg-input"
+						class="w-full rounded-r-md border focus:outline-none p-2"
+						placeholder="Enter your message..."
 					/>
 					<input
-							type="submit"
-							class="absolute bg-green-500 right-0 bottom-0 text-white p-2 rounded-r-md h-full"
-							value="Send"
+						type="submit"
+						class="absolute bg-green-500 right-0 bottom-0 text-white p-2 rounded-r-md h-full"
+						value="Send"
 					/>
 				</div>
 			</form>

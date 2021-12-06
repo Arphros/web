@@ -11,12 +11,13 @@
 				props: {
 					isAuth: false
 				}
-			}
+			};
 		}
 	}
 </script>
+
 <script lang="ts">
-	export let isAuth
+	export let isAuth;
 </script>
 
 <svelte:head>

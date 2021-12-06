@@ -7,7 +7,6 @@ export const post = async (req) => {
 	const password = req.body.get('password');
 	const hashPassword = bcrypt.hashSync(password, 10);
 
-
 	if (!username || !email || !password) {
 		return {
 			headers: { Location: `/errorHandler?status=300&msg=Missing%20required%20field` },

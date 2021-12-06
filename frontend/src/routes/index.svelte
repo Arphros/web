@@ -24,7 +24,7 @@
 								>Download Arphros</button
 							></a
 						>
-						<a href="arphros://"
+						<a href="arphros://play"
 							><button
 								class="w-full mt-4 p-3 shadow-xl bg-blue-500 bg-opacity-80 backdrop-blur-xl backdrop-filter text-white rounded-lg"
 								>Play Arphros</button

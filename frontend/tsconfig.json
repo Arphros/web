@@ -28,11 +28,11 @@
 		}
 	},
 	"include": [
-      "src/**/*.d.ts",
-      "src/**/*.js",
-      "src/**/*.ts",
-      "src/**/*.svelte",
-      "../../../../../../../Program Files/JetBrains/WebStorm 2021.3/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts",
-      "../../../../../../../Program Files/JetBrains/WebStorm 2021.3/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts"
-    ]
+		"src/**/*.d.ts",
+		"src/**/*.js",
+		"src/**/*.ts",
+		"src/**/*.svelte",
+		"../../../../../../../Program Files/JetBrains/WebStorm 2021.3/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts",
+		"../../../../../../../Program Files/JetBrains/WebStorm 2021.3/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.dom.d.ts"
+	]
 }

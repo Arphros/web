@@ -10,11 +10,14 @@ server.listen(port, () => {
 
 const cors = require("cors");
 app.use(cors());
+
+
 //app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 //app.use('/public', express.static(__dirname + '/public'));
 //app.set('view engine', 'ejs');
+
 
 const { Server } = require("socket.io");
 const io = new Server(server,{

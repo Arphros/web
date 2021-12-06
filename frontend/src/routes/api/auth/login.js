@@ -7,16 +7,14 @@ export const post = async (req) => {
 	const username = req.body.get('username');
 	const password = req.body.get('password');
 
-	let rows = await db.execute('SELECT * FROM user WHERE username = ?', [
-		username,
-	]);
+	let rows = await db.execute('SELECT * FROM user WHERE username = ?', [username]);
 	if (!rows[0][0]) {
 		return {
 			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credentials` },
 			status: 300
 		};
 	}
-	const isPassCorrect = await bcrypt.compareSync(password, rows[0][0].password)
+	const isPassCorrect = await bcrypt.compareSync(password, rows[0][0].password);
 	if (isPassCorrect === false) {
 		return {
 			headers: { Location: `/errorHandler?status=401&msg=Invalid%20Credenticals` },
@@ -36,11 +34,11 @@ export const post = async (req) => {
 			maxAge: 60 * 60 * 24 * 7,
 			path: '/'
 		}),
-		'Location': '/'
+		Location: '/'
 	};
 
 	return {
 		status: 302,
-		headers,
+		headers
 	};
 };
