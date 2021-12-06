@@ -27,16 +27,7 @@ export const post = async (req) => {
 	rows = await db.execute('SELECT id FROM user WHERE username = ?', [username]);
 	const sessionId = uuidv4();
 
-	let sessionFinding = await db.execute('SELECT * FROM session WHERE id = ?', [rows[0][0].id])
-	if(sessionFinding[0][0]) {
-		if(Date.now() - sessionFinding[0][0].timestamp > 604800000) {
-			await db.execute('DELETE FROM session WHERE id = ?', [rows[0][0].id]);
-		}
-	}
-
-	if(!sessionFinding[0][0]) {
-		await db.execute('INSERT INTO session (session, id, timestamp) VALUES (?, ?, ?)', [sessionId, rows[0][0].id, Date.now()]);
-	}
+	await db.execute('INSERT INTO session (session, id, timestamp) VALUES (?, ?, ?)', [sessionId, rows[0][0].id, Date.now()]);
 
 	const headers = {
 		'Set-Cookie': cookie.serialize('session_id', sessionId, {
