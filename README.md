@@ -1,3 +1,3 @@
 # ArphrosWeb
 
-http://arphros.ddns.net:3000/
+http://arphros.vercel.app/
