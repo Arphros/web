@@ -1,0 +1,5 @@
+node_modules
+*.bat
+*.log
+pnpm-lock.yaml
+config.json

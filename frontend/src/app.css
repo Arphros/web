@@ -1,0 +1,144 @@
+html,body
+{
+	width: 100%;
+	height: 100%;
+	margin: 0px;
+	padding: 0px;
+}
+main,
+nav {
+	overflow-x: hidden;
+	font-family: 'Outfit', 'Noto Sans Thai', 'Sarabun', 'Ma Shan Zheng', sans-serif;
+}
+
+::-webkit-scrollbar {
+	width: 0px;
+}
+
+.nav-btn {
+	@apply text-base p-2 rounded-lg text-center;
+	@apply transform transition duration-150;
+	@apply hover:bg-white hover:bg-opacity-20;
+	font-family: 'Outfit', sans-serif;
+}
+
+.nav-btn:hover {
+	@apply bg-white bg-opacity-20;
+	@apply text-white;
+}
+
+.nav-btn:active {
+	@apply bg-white bg-opacity-20 transform scale-95;
+	@apply text-white;
+}
+
+.center {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.text-shadow-max {
+	text-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.darken-image {
+	filter: brightness(0.6);
+}
+
+.darken-image:hover {
+	filter: brightness(0.8);
+}
+
+.said {
+	text-indent: 50px;
+}
+
+.privacy {
+	@apply m-6;
+}
+
+.privacy p {
+	@apply leading-relaxed;
+}
+
+#aboutme h1 {
+	@apply font-bold text-6xl border-b leading-relaxed;
+}
+
+#aboutme h2 {
+	@apply font-bold text-5xl border-b leading-relaxed;
+}
+
+#aboutme h3 {
+	@apply font-bold text-4xl border-b leading-relaxed;
+}
+
+#aboutme h4 {
+	@apply font-bold text-3xl;
+}
+
+#aboutme h5 {
+	@apply font-bold text-2xl;
+}
+
+#aboutme h6 {
+	@apply font-bold text-xl;
+}
+
+#aboutme ul {
+	@apply list-disc;
+}
+
+#aboutme ol {
+	@apply list-decimal;
+}
+
+#aboutme blockquote {
+	margin: 0;
+}
+
+#aboutme blockquote p {
+	padding: 15px;
+	background: #eee;
+	border-radius: 5px;
+}
+
+#aboutme blockquote p::before {
+	content: '\201C';
+}
+
+#aboutme blockquote p::after {
+	content: '\201D';
+}
+
+#aboutme pre {
+	background: #eee;
+	@apply p-2;
+}
+
+#aboutme code {
+	background: #eee;
+}
+
+#aboutme table,
+td,
+tr,
+thead,
+tbody {
+	@apply border-2 border-black;
+}
+
+.privacy h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	@apply text-4xl font-bold mt-6 mb-3;
+}
+
+.dev {
+	@apply text-center text-2xl font-bold;
+}

@@ -1,0 +1,34 @@
+{
+  "name": "",
+  "isOrdered": true,
+  "folders": {
+    "backend": {
+      "name": "backend",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "client": {
+      "name": "client",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "frontend": {
+      "name": "frontend",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    },
+    "src": {
+      "name": "src",
+      "isOrdered": true,
+      "folders": {},
+      "files": {}
+    }
+  },
+  "files": {
+    "README": 0,
+    "LICENSE": 1
+  }
+}
