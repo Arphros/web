@@ -124,7 +124,7 @@
 				<div class="sidewords">
 					<center><img src="/assets/icons/man.png" alt="man" /></center>
 					<p class="text-2xl text-gray-600 text-center">
-						You will also receive further profile customisations (Such as custom background images).
+						You will also receive further profile customizations (Such as custom background images).
 					</p>
 				</div>
 			</div>
@@ -158,7 +158,7 @@
 			</div>
 			{#if check !== 0}
 				<h1 class="m-6 font-bold text-2xl text-center">
-					Thanks! You choose {check} month{check === 1 ? '' : 's'} package!
+					Thanks! You chose the {check} month{check === 1 ? '' : 's'} package!
 				</h1>
 			{/if}
 			<div class="flex flex-row justify-center w-full">
@@ -166,7 +166,7 @@
 					class="p-3 text-white m-6 shadow-xl text-center bg-blue-400 hover:bg-blue-600 hover:scale-110 transition-all duration-150 rounded-lg"
 					on:click={() => {
 						check !== 0 ? (location.href = `/payment/support/${check}`) : '';
-					}}><span class="text-3xl font-bold">Pay</span></button
+					}}><span class="text-3xl font-bold">Tip us!</span></button
 				>
 			</div>
 		</div>
