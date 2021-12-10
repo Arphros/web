@@ -19,7 +19,7 @@
 <main>
 	<div class="h-full flex justify-center p-24">
 		<div
-			class="bg-white shadow-2xl max-w-9xl px-6 border m-6 py-8 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 grid place-items-center relative"
+				class="bg-white relative shadow-2xl lg:w-9/12 w-full md:m-6 my-4 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
 		>
 			<form action="/api/auth/login" method="post">
 				<h1 class="text-center font-bold text-4xl">Login</h1>

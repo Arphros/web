@@ -7,19 +7,8 @@
   "author": "ArprhosTeam",
   "license": "Apache-2.0",
   "dependencies": {
-    "@sveltejs/adapter-vercel": "^1.0.0-next.31",
-    "autoprefixer": "^10.4.0",
-    "chart.js": "^3.6.0",
     "cors": "^2.8.5",
-    "dotenv": "^10.0.0",
-    "ejs": "^3.1.6",
     "express": "^4.17.1",
-    "hbs": "^4.2.0",
-    "mysql2": "^2.3.3",
-    "postcss": "^8.4.4",
-    "socket.io": "^4.4.0",
-    "svelte-spa-router": "^3.2.0",
-    "tailwindcss": "^2.2.19",
-    "ws": "^8.3.0"
+    "socket.io": "^4.4.0"
   }
 }

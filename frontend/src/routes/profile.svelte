@@ -165,19 +165,19 @@
 			>
 				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
 					><img
-						src="https://arphros.imgix.net/avatar/{id}.png"
+						src="https://arphros.imgix.net/storage/avatar/{id}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png"
 						id="user-avatar"
-						onerror="this.src = 'https://arphros.imgix.net/avatar/__default.png'"
+						onerror="this.src = 'https://arphros.imgix.net/storage/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png'"
 						alt="avatar"
-						class="rounded-full w-40 h-auto"
+						class="w-40 h-auto"
 					/></span
 				>
 				<img
 					id="user-banner"
-					src="https://arphros.imgix.net/banner/{id}.png"
+					src="https://arphros.imgix.net/storage/banner/{id}.png"
 					alt="banner"
 					class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
-					onerror="this.src = 'https://arphros.imgix.net/banner/__default.png'"
+					onerror="this.src = 'https://arphros.imgix.net/storage/banner/__default.png'"
 				/>
 			</div>
 			<h1 class="text-6xl font-bold text-center p-4">{username}</h1>
@@ -187,7 +187,10 @@
 					<h1 class="text-center font-bold text-3xl m-4 p-2">Badges</h1>
 					<div class="flex flex-row m-4 gap-2 space-x-2 justify-evenly flex-wrap">
 						{#each info.badges as badge}
-							<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
+							<div class="has-tooltip">
+								<span class='tooltip rounded shadow-lg p-1 bg-gray-100 border border-black -mt-8'>{badge.split('_').join(' ')}</span>
+								<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
+							</div>
 						{/each}
 					</div>
 				</div>

@@ -66,7 +66,7 @@
 						><img src="/assets/dev/Tinvv.png" class="rounded-full" width="70px" alt="dev" /></center
 					>
 					<h1 class="dev">Tinvv</h1>
-					<p class="text-center">Frontend/Backend Developer</p>
+					<p class="text-center">Full stack Developer and Database administrator</p>
 				</div>
 			</div>
 		</div>

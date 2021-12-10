@@ -27,7 +27,7 @@
 	//#region variables
 	let channelName = '#Lobby';
 	let cooldown = 450;
-	let webSocketUrl = 'ws://localhost:5000/';
+	let webSocketUrl = 'ws://arphros.ddns.net:5000/';
 	let connectionState;
 	let lastMessageTime;
 	export let username;
@@ -60,11 +60,11 @@
 			const a = document.createElement('a')
 			a.href = msg.uid ? `/user/${id}` : ""
 			const img = document.createElement('img');
-			img.src = msg.uid ? `https://arphros.imgix.net/avatar/${msg.uid}.png` : `https://arphros.imgix.net/avatar/__default.png`;
+			img.src = msg.uid ? `https://arphros.imgix.net/storage/avatar/${msg.uid}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png` : `https://arphros.imgix.net/storage/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png`;
 			img.className = 'rounded-full inline-block mx-2';
 			img.width = 30;
 			img.alt = 'avatar';
-			img.onerror = `https://arphros.imgix.net/avatar/__default.png`;
+			img.onerror = `https://arphros.imgix.net/storage/avatar/__default.png`;
 
 			const spanUsername = document.createElement('span');
 			spanUsername.innerText = msg.username;

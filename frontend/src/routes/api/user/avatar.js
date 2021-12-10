@@ -1,6 +1,6 @@
 export const post = async (req) => {
 	let data = req.body;
-	let fetchUrls = "http://arphros.ddns.net:5000/"
+	let fetchUrls = process.env.DEVURLs ?? "http://arphros.ddns.net:5000/"
 	let fetchData = await fetch(`${fetchUrls}user/avatar`,
 		{
 			method: 'POST',

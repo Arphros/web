@@ -50,19 +50,19 @@
 			>
 				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
 				><img
-						src="https://arphros.imgix.net/avatar/{user}.png"
+						src="https://arphros.imgix.net/storage/avatar/{user}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png"
 						id="user-avatar"
-						onerror="this.src = 'https://arphros.imgix.net/user/avatar/__default.png'"
+						onerror="this.src = 'https://arphros.imgix.net/storage/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png'"
 						alt="avatar"
 						class="rounded-full w-40 h-auto"
 				/></span
 				>
 				<img
 						id="user-banner"
-						src="https://arphros.imgix.net/banner/{user}.png"
+						src="https://arphros.imgix.net/storage/banner/{user}.png"
 						alt="banner"
 						class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
-						onerror="this.src = 'https://arphros.imgix.net/banner/__default.png'"
+						onerror="this.src = 'https://arphros.imgix.net/storage/banner/__default.png'"
 				/>
 			</div>
 			<h1 class="text-6xl font-bold text-center p-4">{username}</h1>
