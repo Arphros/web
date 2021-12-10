@@ -54,7 +54,7 @@
 						id="user-avatar"
 						onerror="this.src = 'https://arphros.imgix.net/storage/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png'"
 						alt="avatar"
-						class="rounded-full w-40 h-auto"
+						class="w-40 h-auto"
 				/></span
 				>
 				<img
@@ -73,7 +73,10 @@
 					<div class="flex flex-row m-4 gap-2 space-x-2 justify-evenly flex-wrap">
 						{#if info}
 							{#each info.badges as badge}
-								<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
+								<div class="has-tooltip">
+									<span class='tooltip transition rounded shadow-lg p-1 bg-gray-100 border border-black -mt-10'>{badge.split('_').join(' ')}</span>
+									<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
+								</div>
 							{/each}
 						{/if}
 					</div>

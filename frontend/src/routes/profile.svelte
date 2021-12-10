@@ -188,7 +188,7 @@
 					<div class="flex flex-row m-4 gap-2 space-x-2 justify-evenly flex-wrap">
 						{#each info.badges as badge}
 							<div class="has-tooltip">
-								<span class='tooltip rounded shadow-lg p-1 bg-gray-100 border border-black -mt-8'>{badge.split('_').join(' ')}</span>
+								<span class='tooltip transition rounded shadow-lg p-1 bg-gray-100 border border-black -mt-10'>{badge.split('_').join(' ')}</span>
 								<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
 							</div>
 						{/each}

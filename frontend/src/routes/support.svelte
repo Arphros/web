@@ -101,16 +101,16 @@
 			<div class="grid grid-flow-cols place-items-center md:grid-cols-2 grid-cols-1 m-4 gap-3">
 				<div class="relative">
 					<img
-						src="/assets/examples/chat_ex.png"
-						alt="chat"
+						src="/assets/examples/about_ex.png"
+						alt="about"
 						class="rounded-2xl darken-image transition-all duration-100"
 					/>
 					<span class="absolute center text-4xl text-shadow-max text-white">Be Unique!</span>
 				</div>
 				<div class="sidewords">
-					<center><img src="/assets/icons/chat.png" alt="chat" /></center>
+					<center><img src="/assets/icons/about.png" alt="about" /></center>
 					<p class="text-2xl text-gray-600 text-center">
-						You will receive a customisable username colour across the platform.
+						You can customizable your own about me and have that cool badges!.
 					</p>
 				</div>
 				<div class="relative">
@@ -124,17 +124,31 @@
 				<div class="sidewords">
 					<center><img src="/assets/icons/man.png" alt="man" /></center>
 					<p class="text-2xl text-gray-600 text-center">
-						You will also receive further profile customizations (Such as custom background images).
+						You will receive further profile customizations! Do you want gif images as an banner? sure!
+					</p>
+				</div>
+				<div class="relative">
+					<img
+							src="/assets/examples/chat_ex.png"
+							alt="chat"
+							class="rounded-2xl darken-image transition-all duration-100"
+					/>
+					<span class="absolute center text-4xl text-shadow-max text-white">Super unique!</span>
+				</div>
+				<div class="sidewords">
+					<center><img src="/assets/icons/chat.png" alt="chat" /></center>
+					<p class="text-2xl text-gray-600 text-center">
+						You will receive an ability to use markdown in chat, isn't it amazing!?
 					</p>
 				</div>
 			</div>
 			<h1 class="md:text-6xl text-2xl font-bold text-center m-6 border-t p-4">
-				What are you wating for?
+				What are you waiting for?
 			</h1>
 			<center><img src="/assets/badges/supporter.png" alt="supporter-badge" width="100px" /></center
 			>
 			<h1 class="m-6 font-bold text-2xl text-center">Choose your package that you want!</h1>
-			<div class="flex md:flex-row flex-col">
+			<div class="flex lg:flex-row flex-col">
 				<button
 					class="p-16 m-6 shadow-xl text-center hover:bg-gray-200 hover:scale-110 transition-all duration-150 rounded-lg"
 					on:click={() => (check = 1)}

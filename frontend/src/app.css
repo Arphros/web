@@ -153,9 +153,9 @@ h6 {
 }
 
 .tooltip {
-	@apply invisible absolute;
+	@apply opacity-0 absolute transition duration-150;
 }
 
 .has-tooltip:hover .tooltip {
-	@apply visible z-50
+	@apply opacity-100 z-50
 }

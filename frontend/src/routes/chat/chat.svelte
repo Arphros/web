@@ -5,7 +5,8 @@
 			return {
 				props: {
 					username: session.username,
-					id: session.id
+					id: session.id,
+					info: session.info,
 				}
 			};
 		} else {
@@ -22,16 +23,20 @@
 	//#region modules
 	import { onMount } from 'svelte';
 	import { io } from 'socket.io-client';
+	import { marked } from 'marked';
+	import DOMPurify from 'dompurify';
 	//#endregion
 
 	//#region variables
 	let channelName = '#Lobby';
 	let cooldown = 450;
-	let webSocketUrl = 'ws://arphros.ddns.net:5000/';
+	let webSocketUrl = 'ws://localhost:5000/';
 	let connectionState;
 	let lastMessageTime;
+	let msgLimitLength;
 	export let username;
 	export let id;
+	export let info;
 	//#endregion
 
 	//#region On mount
@@ -74,6 +79,7 @@
 			spanTimestamp.innerText = msg.timestamp;
 			const message = document.createElement('div');
 			message.className = 'break-all mx-2 my-1';
+			message.id = 'aboutme'
 			message.innerHTML = msg.content;
 
 			spanUsername.appendChild(spanTimestamp);
@@ -97,16 +103,20 @@
 			e.preventDefault();
 			if (connectionState === false) return;
 			let msg = document.getElementById('msg-input') as HTMLInputElement;
+
 			let msgVal = msg.value;
-
-			msgVal = msgVal.replace(/(<([^>]+)>)/gi, '');
-
 			if (msgVal === '') return;
-			if (msgVal.length > 240) {
+			if (msgVal.length > msgLimitLength) {
 				alert('Message is too long!');
 				return;
 			}
-
+			if(info.badges.includes('Supporter')) {
+				msgVal = DOMPurify.sanitize(marked.parse(msgVal));
+				msgLimitLength = 500;
+			} else {
+				msgVal = DOMPurify.sanitize(msgVal)
+				msgLimitLength = 240;
+			}
 			if ((lastMessageTime && Date.now() - lastMessageTime) < cooldown) {
 				alert("Chill, that's too fast!");
 				return;
