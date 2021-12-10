@@ -33,5 +33,5 @@
 			</div>
 		</div>
 	</div>
-	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.alpha-4</h1>
+	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.beta-1</h1>
 </nav>
