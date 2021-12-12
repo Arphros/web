@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 
-	export let blogs = fetch('http://localhost:5000/blogs/getAllBlogs?limit=4').then(res => res.json())
+	export let blogs = fetch('https://arphros.ddns.net:5000/blogs/getAllBlogs?limit=4').then(res => res.json())
 </script>
 
 <svelte:head>

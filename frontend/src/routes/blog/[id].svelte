@@ -8,7 +8,7 @@
     //#endregion
     //#region Fetch data
     async function fetchData() {
-        let rawData = await fetch(`http://localhost:5000/blogs/getBlog?id=${id}`, {
+        let rawData = await fetch(`https://arphros.ddns.net:5000/blogs/getBlog?id=${id}`, {
             method: 'GET',
         });
         let data = await rawData.json();
