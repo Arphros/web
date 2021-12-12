@@ -31,7 +31,7 @@
 	//#region variables
 	let channelName = '#Lobby';
 	let cooldown = 450;
-	let webSocketUrl = 'ws://localhost:5000/';
+	let webSocketUrl = 'ws://arphros.ddns.net:5000/';
 	let connectionState;
 	let lastMessageTime;
 	let msgLimitLength;
