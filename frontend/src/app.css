@@ -5,6 +5,10 @@ html,body
 	margin: 0px;
 	padding: 0px;
 }
+
+#a {
+	@apply underline underline-offset-2 decoration-blue-500 text-blue-500 cursor-pointer;
+}
 main,
 nav {
 	overflow-x: hidden;
@@ -12,22 +16,13 @@ nav {
 }
 
 ::-webkit-scrollbar {
-	width: 10px;
-}
-
-::-webkit-scrollbar-track {
-	background-color:transparent;
-	border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb {
-	background-color: deepskyblue;
-	border-radius: 9999px;
+	width: 0px;
 }
 .nav-btn {
 	@apply text-base p-2 rounded-lg text-center;
 	@apply transform transition duration-150;
 	@apply hover:bg-white hover:bg-opacity-20;
+	@apply cursor-pointer;
 	font-family: 'Outfit', sans-serif;
 }
 
@@ -72,6 +67,10 @@ nav {
 	@apply leading-relaxed;
 }
 
+#aboutme a {
+	@apply underline underline-offset-2 decoration-blue-500 text-blue-500 cursor-pointer leading-relaxed;
+}
+
 #aboutme h1 {
 	@apply font-bold text-6xl border-b leading-relaxed;
 }
@@ -94,6 +93,14 @@ nav {
 
 #aboutme h6 {
 	@apply font-bold text-xl;
+}
+
+#aboutme p {
+	@apply leading-relaxed;
+}
+
+#aboutme img {
+	@apply rounded-xl;
 }
 
 #aboutme ul {

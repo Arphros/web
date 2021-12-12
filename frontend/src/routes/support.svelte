@@ -15,7 +15,7 @@
 				<img
 					src="/assets/images/banner_supporter.png"
 					alt="banner"
-					class="rounded-t-xl w-full transition-all duration-100 filter blur-sm hover:blur-none hover:scale-150 darken-image"
+					class="rounded-t-xl w-full duration-100 filter blur-sm hover:blur-none hover:scale-150 darken-image"
 				/>
 			</div>
 			<!--
@@ -39,24 +39,24 @@
 			</p>
 			<p class="text-right m-6 text-2xl font-bold">- Kidjanate (Lead developer of Arphros)</p>
 			<h1 class="text-6xl font-bold text-center m-6 border-t p-4">Did you know...</h1>
-			<p class="text-3xl text-yellow-500 m-6">Arphros is not cheap and not free to run.</p>
+			<p class="text-3xl text-yellow-500 m-6 underline decoration-yellow-500 underline-offset-2">Arphros is not cheap and not free to run.</p>
 			<p class="text-lg said m-6">
 				While we provide this game for free, but we still have to pay for it. And if we always took
 				the money out from our pockets. We would be broke and we wouldn't be able to upgrade our
 				server to accommodate our users. While we do having more users, we need more server
 				performance. So we are asking you for help on this :D
 			</p>
-			<p class="text-3xl text-yellow-500 m-6">We are all still students.</p>
+			<p class="text-3xl text-yellow-500 m-6 underline decoration-yellow-500 underline-offset-2">We are all still students.</p>
 			<p class="text-lg said m-6">
 				Arphros developers don't have a job. This means we don't get any income except the savings
 				money that parents give us.
 			</p>
-			<p class="text-3xl text-yellow-500 m-6">We are using an old PC to run it.</p>
+			<p class="text-3xl text-yellow-500 m-6 underline decoration-yellow-500 underline-offset-2">We are using an old PC to run it.</p>
 			<p class="text-lg said m-6">
 				We don't have a powerful PC, except this old PC that's running the server. We really pity
 				it. It works harder to handle the server while it's online.
 			</p>
-			<p class="text-3xl text-yellow-500 m-6">Arphros doesn't have ads, and never will.</p>
+			<p class="text-3xl text-yellow-500 m-6 underline decoration-yellow-500 underline-offset-2">Arphros doesn't have ads, and never will.</p>
 			<p class="text-lg said m-6">
 				Ads are so annoying, right? Yeah, we think so too. We don't have ads in our game or on our
 				website because we believe in no ads.
@@ -138,7 +138,7 @@
 				<div class="sidewords">
 					<center><img src="/assets/icons/chat.png" alt="chat" /></center>
 					<p class="text-2xl text-gray-600 text-center">
-						You will receive an ability to use markdown in chat, isn't it amazing!?
+						You will receive an ability to use markdown and other commands in chat, isn't it amazing!?
 					</p>
 				</div>
 			</div>

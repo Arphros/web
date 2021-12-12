@@ -17,12 +17,12 @@
 
 <nav
 	id="footer"
-	class="bg-blue-600 bg-opacity-70 fixed bottom-0 w-full backdrop-blur-2xl z-50 m-0 backdrop-filter p-3 text-white transition-all duration-200"
+	class='bg-gradient-to-r from-indigo-700/70 via-violet-700/70 to-blue-700/70 fixed bottom-0 w-full backdrop-blur-2xl z-50 m-0 p-3 text-white duration-200'
 >
 	<div class="flex gap-3 w-full">
 		<div class="text-center text-sm w-full">
 			<div class="flex justify-center align-middle mb-1 flex-row space-x-4">
-				<a href="/docs/api"><h1 class="text-center">API</h1></a>
+				<a href="https://arphros.readthedocs.io/en/latest/"><h1 class="text-center">API</h1></a>
 				<a href="/about/terms"><h1>ToS</h1></a>
 				<a href="/about/privacy"><h1>Privacy</h1></a>
 				<a href="/about/copyright"><h1>Copyright</h1></a>
@@ -33,5 +33,5 @@
 			</div>
 		</div>
 	</div>
-	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.beta-1</h1>
+	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.beta-2</h1>
 </nav>

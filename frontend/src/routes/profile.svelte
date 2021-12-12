@@ -157,10 +157,10 @@
 <main>
 	<div class="h-full min-h-screen flex justify-center">
 		<div
-				class="bg-white relative shadow-2xl lg:w-9/12 w-full md:m-6 my-4 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
+				class="bg-white relative {info.badges.includes('Supporter') ? 'shadow-violet-800/30' : ''} shadow-2xl lg:w-9/12 w-full md:m-6 my-4 rounded-xl backdrop-blur-xl bg-opacity-20 h-full"
 		>
 			<div
-				class="max-h-72 h-full grid grid-cols-1 place-items-center static transition duration-300 justify-center items-center rounded-t-xl overflow-y-scroll border-b border-black"
+				class="max-h-72 h-full grid grid-cols-1 place-items-center static transition duration-300 justify-center items-center rounded-xl overflow-y-scroll border-b border-black"
 				id="bannerContainer"
 			>
 				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
@@ -176,11 +176,11 @@
 					id="user-banner"
 					src="https://arphros.imgix.net/storage/banner/{id}.png"
 					alt="banner"
-					class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
+					class="rounded-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
 					onerror="this.src = 'https://arphros.imgix.net/storage/banner/__default.png'"
 				/>
 			</div>
-			<h1 class="text-6xl font-bold text-center p-4">{username}</h1>
+			<h1 class="text-6xl font-bold text-center p-4 {info.badges.includes('Supporter') ? 'text-violet-500' : ''}">{username}</h1>
 			<h1 class="text-xl font-bold text-gray-400 text-center border-b mb-2">#{id}</h1>
 			<div class="flex md:flex-row flex-col border-b">
 				<div class="h-full w-full">
@@ -189,7 +189,7 @@
 						{#each info.badges as badge}
 							<div class="has-tooltip">
 								<span class='tooltip transition rounded shadow-lg p-1 bg-gray-100 border border-black -mt-10'>{badge.split('_').join(' ')}</span>
-								<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} />
+								<img src="/assets/badges/{badge.toLowerCase()}.png" width="60px" alt={badge} class="hover:scale-125 duration-150"/>
 							</div>
 						{/each}
 					</div>
@@ -231,38 +231,53 @@
 					<h1 class="font-bold text-4xl">Settings</h1>
 					<div class="space-y-4 flex flex-col">
 						<div class="flex flex-col p-3">
-							<form id="name-form" class="space-y-3">
+							<form id="name-form" class="space-y-3 space-x-3">
 								<label for="username" class="text-2xl">Change username:</label><br />
 								<input
 									type="text"
 									name="username"
 									id="username"
 									placeholder="Enter new username..."
-									class="focus:outline-none p-1 focus:ring ring-blue-500 ring-offset-2 rounded-sm border transition duration-200 border-black rounded-md "
+									class="focus:outline-none p-1 shadow-lg shadow-blue-500/40 focus:ring ring-blue-500 ring-offset-2 rounded-sm border duration-200 border-blue-400 rounded-md "
+								/>
+								<input
+										type="submit"
+										value="Submit"
+										class="duration-200 p-2 rounded-full text-white bg-green-300/30 hover:bg-green-300/50 text-green-500 cursor-pointer shadow-lg shadow-green-500/30"
 								/>
 								<h1 class="text-gray-400">[ Require 200 tickets ]</h1>
 							</form>
 						</div>
 						<div class="flex flex-col p-3">
 							<form id="avatar-form" class="space-y-3">
-								<label for="file" class="text-2xl">Change avatar:</label><br />
-								<input type="file" name="avatar" id="file" /><br />
+								<label for="file" class="text-2xl">Change avatar:</label>
+								<input type="file" name="avatar" id="file"
+									   class="block w-full text-sm text-gray-500
+									   file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
+									   file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700
+									   hover:file:bg-violet-100"
+								/>
 								<input
 									type="submit"
 									value="Submit"
-									class="p-1 rounded-md text-white bg-green-500 cursor-pointer"
+									class="duration-200 p-2 rounded-full text-white bg-green-300/30 hover:bg-green-300/50 text-green-500 cursor-pointer shadow-lg shadow-green-500/30"
 								/>
 							</form>
 						</div>
 						<div class="flex flex-col p-3">
 							<form id="banner-form" class="space-y-3">
-								<label for="username" class="text-2xl">Change banner:</label><br />
-								<input type="file" name="banner" id="banner" /><br />
+								<label for="username" class="text-2xl">Change banner:</label>
+								<input type="file" name="banner" id="banner"
+									   class="block w-full text-sm text-gray-500
+									   file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0
+									   file:text-sm file:font-semibold file:bg-violet-50 file:text-violet-700
+									   hover:file:bg-violet-100"
+								/>
 								<input
 									type="submit"
 									value="Submit"
 									id="banner-submit"
-									class="p-1 rounded-md text-white bg-green-500 cursor-pointer"
+									class="duration-200 p-2 rounded-full text-white bg-green-300/30 hover:bg-green-300/50 text-green-500 cursor-pointer shadow-lg shadow-green-500/30"
 								/>
 							</form>
 						</div>
@@ -272,7 +287,7 @@
 								<input
 										type="submit"
 										value="Logout"
-										class="p-1 rounded-md text-white bg-red-500 cursor-pointer"
+										class="duration-200 p-2 rounded-full text-white bg-red-300/30 hover:bg-red-300/50 text-red-500 cursor-pointer shadow-lg shadow-red-500/30"
 								/>
 							</form>
 						<form id="delete-form" class="space-y-3">
@@ -280,7 +295,7 @@
 								<input
 										type="submit"
 										value="Delete"
-										class="p-1 rounded-md text-white bg-red-500 cursor-pointer"
+										class="duration-200 p-2 rounded-full text-white bg-red-300/30 hover:bg-red-300/50 text-red-500 cursor-pointer shadow-lg shadow-red-500/30"
 								/>
 							</form>
 						</div>

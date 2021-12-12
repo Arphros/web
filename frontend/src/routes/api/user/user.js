@@ -10,7 +10,7 @@ export const post = async (req) => {
 		};
 	}
 	let rows = await db
-		.execute('SELECT username, id, info, about FROM user WHERE id = ?', [id])
+		.execute('SELECT username, id, info, about about FROM user WHERE id = ?', [id])
 		.catch((err) => {
 			return {
 				headers: { Location: `/errorHandler?status=300&msg=${err.sqlMessage}` },

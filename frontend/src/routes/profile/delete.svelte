@@ -31,13 +31,11 @@
                 <h1 class="text-center font-bold text-4xl">Enter your password</h1>
                     <div class="formdata">
                         <div class="flex flex-col space-y-4 mt-4 justify-center">
-                            <label for="id">User id:</label>
                             <input
                                     type="text"
-                                    class="border shadow-xl p-2 rounded-lg w-full"
+                                    class="hidden"
                                     name="id"
                                     value={id}
-                                    id="id"
                                     on:click={() => {return false}}
                             />
                         <label for="password">Password:</label>

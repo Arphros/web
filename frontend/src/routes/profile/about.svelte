@@ -65,6 +65,10 @@
 	//#endregion
 </script>
 
+<svelte:head>
+	<title>Arphros | Profile</title>
+</svelte:head>
+
 <main class="min-h-screen">
 	<div class="flex md:flex-row flex-col space-x-2 items-stretch">
 		<div class="flex justify-center">

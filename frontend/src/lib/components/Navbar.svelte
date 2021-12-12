@@ -18,7 +18,7 @@
 </script>
 
 <nav
-	class="md:block hidden bg-blue-600 bg-opacity-70 backdrop-blur-2xl top-0 z-50 sticky backdrop-filter w-full md:p-2 text-white transition-all duration-200"
+	class="md:block hidden bg-gradient-to-r from-indigo-700/70 via-violet-700/70 to-blue-700/70 backdrop-blur-2xl top-0 z-50 sticky w-full md:p-2 text-white duration-200"
 >
 	<div class="flex md:flex-row flex-col gap-3 w-full relative">
 		<h1 on:click={() => goto('/')} class="nav-btn">Home</h1>
@@ -30,7 +30,7 @@
 </nav>
 
 <nav
-		class="block md:hidden bg-blue-600 bg-opacity-70 backdrop-blur-2xl top-0 z-50 sticky backdrop-filter w-full md:p-2 text-white transition-all duration-200"
+		class="block md:hidden bg-gradient-to-r from-indigo-700/70 to-violet-700/70 backdrop-blur-2xl top-0 z-50 sticky w-full md:p-2 text-white duration-200"
 >
 	<div class="p-2 flex flex-row relative">
 		<h1 on:click={() => goto('/')} class="nav-btn">Arphros</h1>

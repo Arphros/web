@@ -25,6 +25,7 @@
 	import { io } from 'socket.io-client';
 	import { marked } from 'marked';
 	import DOMPurify from 'dompurify';
+	import { goto } from '$app/navigation'
 	//#endregion
 
 	//#region variables
@@ -37,6 +38,7 @@
 	export let username;
 	export let id;
 	export let info;
+	export let onlineUsers
 	//#endregion
 
 	//#region On mount
@@ -45,19 +47,30 @@
 		//#region On connection close, open
 		socket.on('connect', () => {
 			connectionState = socket.connected;
+			socket.emit('new connected');
 		});
 		socket.on('disconnect', () => {
 			connectionState = socket.connected;
-			socket.disconnect();
+			socket.emit('new drop')
 		});
-			//#endregion
+		//#endregion
+		//#region fetch user online
+		socket.on('new connected', () => {
+			socket.emit('user connected', { id: id });
+		});
+		socket.on('user list', (users) => {
+			onlineUsers = users.length
+		})
+		//#endregion
 
 		//#region On message
 		socket.on('message list', (msg) => {
+			let isCommand = /\/(.*)\[(.*)\]/.test(msg.content)
+			let command = msg.content.match(/\/(.*)\[(.*)\]/);
 			//#region Add element
 			const msgWrapper = document.createElement('div');
 			msgWrapper.className =
-				'p-2 mx-3 my-4 message-wrapper border border-black shadow-xl rounded-lg align-middle';
+					'p-2 mx-3 my-4 message-wrapper border border-black shadow-xl rounded-lg align-middle';
 			const msgBox = document.createElement('div');
 			msgBox.className = 'flex flex-col justify-end items-start relative';
 			const username = document.createElement('div');
@@ -69,7 +82,7 @@
 			img.className = 'rounded-full inline-block mx-2';
 			img.width = 30;
 			img.alt = 'avatar';
-			img.onerror = `https://arphros.imgix.net/storage/avatar/__default.png`;
+			img.onerror = () => { img.src=`https://arphros.imgix.net/storage/avatar/__default.png`; }
 
 			const spanUsername = document.createElement('span');
 			spanUsername.innerText = msg.username;
@@ -80,7 +93,64 @@
 			const message = document.createElement('div');
 			message.className = 'break-all mx-2 my-1';
 			message.id = 'aboutme'
-			message.innerHTML = msg.content;
+			message.innerHTML = isCommand ? msg.content.replace(/\/(.*)\[(.*)\]/, '') : msg.content;
+
+			//#region Commands
+			if (command && msg.isSupporter) {
+				switch (command[1]) {
+					case 'tailwindStyle':
+						msgWrapper.classList.add(command[2])
+						break;
+					case 'style':
+						msgWrapper.style[command[2].split(',')[0]] = command[2].split(',')[1]
+						break;
+					case 'setBgAsBanner':
+						msgWrapper.style.backgroundImage = `url('https://arphros.imgix.net/storage/banner/${msg.uid}.png')`
+						msgWrapper.style.backgroundSize = 'cover';
+						msgWrapper.style.backgroundPosition = 'center';
+						msgWrapper.style.backgroundRepeat = 'no-repeat';
+						msgWrapper.style.backgroundAttachment = 'local';
+						break;
+					case 'setBgFromURL':
+						msgWrapper.style.backgroundImage = `url('${command[2]}')`
+						msgWrapper.style.backgroundSize = 'cover';
+						msgWrapper.style.backgroundPosition = 'center';
+						msgWrapper.style.backgroundRepeat = 'no-repeat';
+						msgWrapper.style.backgroundAttachment = 'local';
+						break;
+					case 'setBgColor':
+						msgWrapper.style.backgroundColor = command[2]
+						break;
+					case 'textColor':
+						msgWrapper.style.color = command[2]
+						break;
+					case 'setBorder':
+						msgWrapper.style.border = command[2]
+						break;
+					case 'setBorderRadius':
+						msgWrapper.style.borderRadius = command[2]
+						break;
+					case 'position':
+						msgWrapper.style.position = command[2]
+						break;
+					case 'opacity':
+						msgWrapper.style.opacity = command[2]
+						break;
+					case 'error':
+						msgWrapper.classList.add('bg-red-500')
+						break;
+					case 'success':
+						msgWrapper.classList.add('bg-green-500')
+						break;
+					case 'warning':
+						msgWrapper.classList.add('bg-yellow-500')
+						break;
+					case 'glowEffect':
+						msgWrapper.classList.add(`shadow-${command[2]}`)
+						break;
+				}
+			}
+			//#endregion
 
 			spanUsername.appendChild(spanTimestamp);
 			username.appendChild(img);
@@ -100,7 +170,7 @@
 		//#region Form handling
 		document.getElementById('msg-form').onsubmit = async (e) => {
 			//#region message handling
-			e.preventDefault();
+			e.preventDefault(); e.stopPropagation();  e.stopImmediatePropagation();
 			if (connectionState === false) return;
 			let msg = document.getElementById('msg-input') as HTMLInputElement;
 
@@ -111,10 +181,10 @@
 				return;
 			}
 			if(info.badges.includes('Supporter')) {
-				msgVal = DOMPurify.sanitize(marked.parse(msgVal));
+				msgVal = DOMPurify.sanitize(marked.parse(msgVal), { FORBID_TAGS: ['style', 'script', 'a'] });
 				msgLimitLength = 500;
 			} else {
-				msgVal = DOMPurify.sanitize(msgVal)
+				msgVal = DOMPurify.sanitize(msgVal, {ALLOWED_TAGS: ['']})
 				msgLimitLength = 240;
 			}
 			if ((lastMessageTime && Date.now() - lastMessageTime) < cooldown) {
@@ -125,7 +195,8 @@
 			socket.emit('chat message', {
 				username: username,
 				uid: id,
-				content: msgVal
+				content: msgVal,
+				isSupporter: info.badges.includes('Supporter')
 			});
 			lastMessageTime = Date.now();
 			msg.value = '';
@@ -140,18 +211,18 @@
 	<title>Arphros | Chat</title>
 </svelte:head>
 
-<main>
+<main class="min-h-screen">
 	<div class="h-full w-full flex justify-center mt-4">
 		<div
 			class="bg-white w-full md:max-w-3xl max-w-full shadow-2xl min-h-full m-6 max-h-120 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 grid place-items-center"
 		>
 			<h1
-				class="top-0 rounded-t-lg m-2 p-2 font-bold text-4xl text-center bg-black text-white w-full relative"
+				class="top-0 rounded-t-lg m-2 p-2 font-bold text-4xl text-center bg-gradient-to-r from-indigo-700/70 via-violet-700/70 to-blue-700/70 text-white w-full relative"
 			>
 				{channelName}
 			</h1>
 			<h1 class="text-{connectionState === true ? 'green' : 'red'}-500 text-lg">
-				{connectionState === true ? 'User connected!' : 'User disconnected!'}<br />
+				{connectionState === true ? 'User connected!' : 'User disconnected!'} [{onlineUsers} online!]<br />
 			</h1>
 			<div class="container max-h-full overflow-scroll" id="msg-container" />
 			<form class="w-full h-full" id="msg-form">
@@ -173,6 +244,7 @@
 			</form>
 		</div>
 	</div>
+	<center>Learn more about <h1 on:click={() => goto("https://tinvv.gitbook.io/arphros/web/chat-commands")} id="a"> Chat Commands</h1></center>
 </main>
 
 <style>
