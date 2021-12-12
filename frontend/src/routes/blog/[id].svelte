@@ -45,16 +45,3 @@
         </div>
     </main>
 {/await}
-
-<style>
-    :global(img) {
-        width: 400px;
-        height: auto;
-        transition: all 0.3s cubic-bezier(0.87, 0, 0.13, 1);
-    }
-
-    :global(img:hover) {
-        width: 1000px;
-        height: auto;
-    }
-</style>
