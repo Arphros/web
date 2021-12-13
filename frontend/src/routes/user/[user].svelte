@@ -27,7 +27,67 @@
 		<title>Arphros | {data.user.username}</title>
 	{/await}
 </svelte:head>
-{#await fetchData() then data}
+{#await fetchData()}
+	<main class="flow text-gray-400">
+		<div class="h-full min-h-screen flex justify-center">
+			<div
+					class="bg-white relative shadow-2xl lg:w-9/12 w-full md:m-6 my-4 rounded-xl backdrop-blur-xl bg-opacity-20 h-full"
+			>
+				<div
+						class="max-h-72 h-full grid grid-cols-1 place-items-center static transition duration-300 justify-center items-center rounded-t-xl overflow-y-scroll border-b border-black"
+				>
+				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
+				><img
+						src="https://arphros.ddns.net:5000/storage/avatar/{user}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png"
+						onerror="this.src = 'https://arphros.ddns.net:5000/storage/avatar/__default.png'"
+						alt="avatar"
+						class="w-40 h-40 object-center object-cover rounded-full"
+				/></span
+				>
+					<img
+							src="https://arphros.ddns.net:5000/storage/banner/{user}.png"
+							alt="banner"
+							class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
+							onerror="this.src = 'https://arphros.ddns.net:5000/storage/banner/__default.png'"
+					/>
+				</div>
+				<h1 class="text-6xl font-bold text-center p-4 animate-pulse">...............</h1>
+				<h1 class="text-xl font-bold text-gray-400 text-center border-b mb-2">#{user}</h1>
+				<div class="flex md:flex-row flex-col border-b">
+					<div class="h-full w-full animate-pulse">
+						<h1 class="text-center font-bold text-3xl m-4 p-2 ">...............</h1>
+						<div class="flex flex-row m-4 gap-2 space-x-2 justify-evenly flex-wrap">
+						</div>
+					</div>
+					<div class="h-full w-full md:relative m-4 flex flex-col space-y-2 animate-pulse">
+						<h1 class="text-center font-bold text-3xl m-4 p-2">...............</h1>
+						<h1 class="text-2xl">
+							........<span class="absolute right-4">.......</span>
+						</h1>
+						<h1 class="text-2xl">...<span class="absolute right-4">..........</span></h1>
+						<h1 class="text-2xl">
+							............... <span class="absolute right-4">...........</span>
+						</h1>
+						<h1 class="text-2xl">
+							........... <span class="absolute right-4">.........</span>
+						</h1>
+					</div>
+				</div>
+				<div class="h-full w-full m-3 flex justify-center relative border-b p-3">
+					<div class="wrapper w-9/12">
+						<h1 class="text-4xl font-bold relative animate-pulse">.....................</h1>
+						<div
+								id="aboutme"
+								class="container max-w-full max-h-96 mt-6 overflow-scroll border-2 border-black p-2 shadow-xl rounded-lg"
+						>
+							...
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</main>
+{:then data}
 <main>
 	<div class="h-full min-h-screen flex justify-center">
 		<div
@@ -39,19 +99,19 @@
 			>
 				<span class="z-50 absolute top-18 text-7xl text-white text-shadow-max"
 				><img
-						src="https://arphros.imgix.net/avatar/{user}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png"
+						src="https://arphros.ddns.net:5000/storage/avatar/{user}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png"
 						id="user-avatar"
-						onerror="this.src = 'https://arphros.imgix.net/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png'"
+						onerror="this.src = 'https://arphros.ddns.net:5000/storage/avatar/__default.png'"
 						alt="avatar"
-						class="w-40 h-auto"
+						class="w-40 h-40 object-center object-cover rounded-full"
 				/></span
 				>
 				<img
 						id="user-banner"
-						src="https://arphros.imgix.net/banner/{user}.png"
+						src="https://arphros.ddns.net:5000/storage/banner/{user}.png"
 						alt="banner"
 						class="rounded-t-xl top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full transition-all duration-100 darken-image"
-						onerror="this.src = 'https://arphros.imgix.net/banner/__default.png'"
+						onerror="this.src = 'https://arphros.ddns.net:5000/storage/banner/__default.png'"
 				/>
 			</div>
 			<h1 class="text-6xl font-bold text-center p-4 {JSON.parse(data.user.info).badges.includes('Supporter') ? 'text-violet-500' : ''}">{data.user.username}</h1>

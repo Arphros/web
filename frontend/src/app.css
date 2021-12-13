@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Flow+Rounded&display=swap');
+
 html,body
 {
 	width: 100%;
@@ -15,9 +17,6 @@ nav {
 	font-family: 'Outfit', 'Noto Sans Thai', 'Sarabun', 'Ma Shan Zheng', sans-serif;
 }
 
-::-webkit-scrollbar {
-	width: 0px;
-}
 .nav-btn {
 	@apply text-base p-2 rounded-lg text-center;
 	@apply transform transition duration-150;
@@ -165,4 +164,8 @@ h6 {
 
 .has-tooltip:hover .tooltip {
 	@apply opacity-100 z-50
+}
+
+.flow {
+	font-family: 'Flow Rounded', sans-serif;
 }

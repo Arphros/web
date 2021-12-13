@@ -38,7 +38,7 @@
 	export let username;
 	export let id;
 	export let info;
-	export let onlineUsers
+	export let onlineUsers = 0;
 	//#endregion
 
 	//#region On mount
@@ -78,11 +78,11 @@
 			const a = document.createElement('a')
 			a.href = msg.uid ? `/user/${id}` : ""
 			const img = document.createElement('img');
-			img.src = msg.uid ? `https://arphros.imgix.net/avatar/${msg.uid}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png` : `https://arphros.imgix.net/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png`;
-			img.className = 'rounded-full inline-block mx-2';
+			img.src = msg.uid ? `https://arphros.ddns.net:5000/storage/avatar/${msg.uid}.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png` : `https://arphros.ddns.net:5000/storage/avatar/__default.png?width=200&height=200&fit=crop&auto=compress&mask=ellipse&fm=png`;
+			img.className = 'rounded-full w-10 h-10 object-center object-cover inline-block mx-2';
 			img.width = 30;
 			img.alt = 'avatar';
-			img.onerror = () => { img.src=`https://arphros.imgix.net/avatar/__default.png`; }
+			img.onerror = () => { img.src=`https://arphros.ddns.net:5000/storage/avatar/__default.png`; }
 
 			const spanUsername = document.createElement('span');
 			spanUsername.innerText = msg.username;
@@ -105,7 +105,7 @@
 						msgWrapper.style[command[2].split(',')[0]] = command[2].split(',')[1]
 						break;
 					case 'setBgAsBanner':
-						msgWrapper.style.backgroundImage = `url('https://arphros.imgix.net/banner/${msg.uid}.png')`
+						msgWrapper.style.backgroundImage = `url('https://arphros.ddns.net:5000/storage/banner/${msg.uid}.png')`
 						msgWrapper.style.backgroundSize = 'cover';
 						msgWrapper.style.backgroundPosition = 'center';
 						msgWrapper.style.backgroundRepeat = 'no-repeat';
@@ -224,7 +224,7 @@
 			<h1 class="text-{connectionState === true ? 'green' : 'red'}-500 text-lg">
 				{connectionState === true ? 'User connected!' : 'User disconnected!'} [{onlineUsers} online!]<br />
 			</h1>
-			<div class="container max-h-full overflow-scroll" id="msg-container" />
+			<div class="container max-h-full overflow-y-scroll" id="msg-container" />
 			<form class="w-full h-full" id="msg-form">
 				<div class="relative">
 					<input
