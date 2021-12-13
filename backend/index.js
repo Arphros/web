@@ -10,15 +10,8 @@ server.listen(port, () => {
 });
 
 const cors = require("cors");
-var whitelist = ['https://arphros.ddns.net', 'https://arphros.vercel.app/']
 var corsOptions = {
-    origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
-            callback(null, true)
-        } else {
-            callback(new Error('Not allowed by CORS'))
-        }
-    }
+    origin: "*",
 }
 app.use(cors(corsOptions));
 
@@ -34,7 +27,7 @@ app.use('/blogs', express.static(__dirname + '/blog'));
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors: {
-        origin: "https://arphros.vercel.app/",
+        origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE"],
     }
 });
