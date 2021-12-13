@@ -10,10 +10,17 @@ server.listen(port, () => {
 });
 
 const cors = require("cors");
-app.use(cors({
-    origin: 'https://arphros.vercel.app/',
-    optionsSuccessStatus: 200
-}));
+var whitelist = ['https://arphros.ddns.net', 'https://arphros.vercel.app/']
+var corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true)
+        } else {
+            callback(new Error('Not allowed by CORS'))
+        }
+    }
+}
+app.use(cors(corsOptions));
 
 
 //app.use(express.urlencoded({ extended: true }));
