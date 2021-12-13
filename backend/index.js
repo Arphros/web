@@ -10,7 +10,10 @@ server.listen(port, () => {
 });
 
 const cors = require("cors");
-app.use(cors());
+app.use(cors({
+    origin: 'https://arphros.vercel.app/',
+    optionsSuccessStatus: 200
+}));
 
 
 //app.use(express.urlencoded({ extended: true }));
@@ -24,7 +27,7 @@ app.use('/blogs', express.static(__dirname + '/blog'));
 const { Server } = require("socket.io");
 const io = new Server(server,{
     cors: {
-        origin: "*",
+        origin: "https://arphros.vercel.app/",
         methods: ["GET", "POST", "PUT", "DELETE"],
     }
 });
