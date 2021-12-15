@@ -1,4 +1,4 @@
-# Blog System
+  # Blog System
 
 ### Getting Started
 Setup basic file structure:

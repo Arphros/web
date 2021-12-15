@@ -97,7 +97,7 @@ app.post('/user/banner', (req, res) => {
 
 app.get('/blogs/getAllBlogs', (req, res) => {
     const limit = req.query.limit ?? 10000;
-    const allBlogDir = fs.readdirSync(`${process.cwd()}\\blog`);
+    let allBlogDir = fs.readdirSync(`${process.cwd()}\\blog`);
     let blogs = [];
         for (const folder of allBlogDir) {
         const blogFolder = fs.readdirSync(`${process.cwd()}\\blog\\${folder}`);
@@ -141,4 +141,38 @@ app.get('/blogs/getBlog', (req, res) => {
         tags: tags,
         content: blog,
     });
+})
+
+app.get('/blog/search', async (req, res) => {
+    const query = req.query.query;
+    if(!query) {
+        return res.status(400).send({ err: "Bad request" });
+    }
+    let allBlogDir = fs.readdirSync(`${process.cwd()}\\blog`);
+    let blogs = [];
+    for (const folder of allBlogDir) {
+        const blogFolder = fs.readdirSync(`${process.cwd()}\\blog\\${folder}`);
+        for (const file of blogFolder) {
+                const blog = fs.readFileSync(`${process.cwd()}\\blog\\${folder}\\${file}`, 'utf8')
+                const title = blog.match(/<!-- TITLE: (.*) -->/)[1];
+                const author = blog.match(/<!-- AUTHOR: (.*) -->/)[1];
+                const dateWritten = blog.match(/<!-- DATE_WRITTEN: (.*) -->/)[1];
+                const tags = blog.match(/<!-- TAGS: (.*) -->/)[1].split(',');
+                blogs.push({
+                    id: Number(file.split('.')[0]),
+                    title: title,
+                    author: author,
+                    dateWritten: dateWritten,
+                    tags: tags,
+                    content: blog
+                })
+            }
+        }
+
+    const filteredBlogs = blogs.filter(blog => {
+        return blog.title.toLowerCase().includes(query.toLowerCase()) ||
+            blog.author.toLowerCase().includes(query.toLowerCase()) ||
+            blog.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase()))
+    })
+    return res.send({ blogs: filteredBlogs });
 })

@@ -6,13 +6,19 @@
     export let author = $page.query.get('author')
     export let tags = $page.query.get('tags')
     export let limit = $page.query.get('limit') || 10
+    export let query = $page.query.get('query')
 
-    export let blogs = fetch(`https://arphros.ddns.net:5000/blogs/getAllBlogs?limit=${limit}`).then(res => res.json())
+    if(!query) {
+        goto('/blog')
+    }
+
+    export let blogs = fetch(`https://arphros.ddns.net:5000/blog/search?query=${query}`).then(res => res.json())
 </script>
 
 <svelte:head>
     <title>Arphros | Blog</title>
 </svelte:head>
+
 
 <main>
     <div class="h-full min-h-screen flex justify-center">
@@ -45,19 +51,19 @@
                             {#each (sort.toLowerCase() === 'oldest' ? allBlog.blogs : allBlog.blogs.reverse()) as blog}
                                 {#if !author || blog[0].author.toLowerCase() === author.toLowerCase()}
                                     {#if !tags || blog[0].tags.map(str => str.trim()).includes(tags.toLowerCase())}
-                                <center>
-                                <div on:click={() => { goto(`/blog/${blog[0].id}`) }} class="relative container cursor-pointer grid grid-cols-1 border shadow-lg shadow-violet-600/30 rounded-lg max-h-48 max-w-xl">
-                                    <img src="/blog-assets/{blog[0].id}/main.png"  alt="" class="rounded-t-lg top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full"/>
-                                    <h1 class="text-black text-3xl font-bold p-2 truncate">{blog[0].title}</h1>
-                                    <div class="flex flex-rows justify-evenly">
-                                        <p class="text-gray-500 text-md truncate">{blog[0].author}</p>
-                                        <p class="text-gray-500 text-md truncate">{blog[0].tags}</p>
-                                        <p class="text-gray-500 text-md truncate">{blog[0].dateWritten}</p>
-                                    </div>
-                                </div>
-                                </center>
-                                        {/if}
+                                        <center>
+                                            <div on:click={() => { goto(`/blog/${blog.id}`) }} class="relative container cursor-pointer grid grid-cols-1 border shadow-lg shadow-violet-600/30 rounded-lg max-h-48 max-w-xl">
+                                                <img src="/blog-assets/{blog.id}/main.png"  alt="" class="rounded-t-lg top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full"/>
+                                                <h1 class="text-black text-3xl font-bold p-2 truncate">{blog.title}</h1>
+                                                <div class="flex flex-rows justify-evenly">
+                                                    <p class="text-gray-500 text-md truncate">{blog.author}</p>
+                                                    <p class="text-gray-500 text-md truncate">{blog.tags}</p>
+                                                    <p class="text-gray-500 text-md truncate">{blog.dateWritten}</p>
+                                                </div>
+                                            </div>
+                                        </center>
                                     {/if}
+                                {/if}
                             {/each}
                         {/await}
                     </div>

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
 
 	onMount(() => {
 		let lastScrollTop = 0;
@@ -22,16 +23,16 @@
 	<div class="flex gap-3 w-full">
 		<div class="text-center text-sm w-full">
 			<div class="flex justify-center align-middle mb-1 flex-row space-x-4">
-				<a href="https://arphros.readthedocs.io/en/latest/"><h1 class="text-center">API</h1></a>
-				<a href="/about/terms"><h1>ToS</h1></a>
-				<a href="/about/privacy"><h1>Privacy</h1></a>
-				<a href="/about/copyright"><h1>Copyright</h1></a>
-				<a href="/about/teams"><h1>Teams</h1></a>
+				<h1 class="cursor-pointer" on:click={() => goto('https://arphros.readthedocs.io/')}>API</h1>
+				<h1 class="cursor-pointer" on:click={() => goto('/about/terms/')}>ToS</h1>
+				<h1 class="cursor-pointer" on:click={() => goto('/about/privacy/')}>Privacy</h1>
+				<h1 class="cursor-pointer" on:click={() => goto('/about/copyright/')}>Copyright</h1>
+				<h1 class="cursor-pointer" on:click={() => goto('/about/teams/')}>Teams</h1>
 			</div>
 			<div class="flex flex-row justify-center space-x-4">
 				<h1>© Tinvv 2020-2021</h1>
 			</div>
 		</div>
 	</div>
-	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.beta-2</h1>
+	<h1 class="absolute bottom-0 md:right-2 md:text-md text-xs">1.beta-3</h1>
 </nav>

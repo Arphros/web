@@ -98,10 +98,6 @@ nav {
 	@apply leading-relaxed;
 }
 
-#aboutme img {
-	@apply rounded-xl;
-}
-
 #aboutme ul {
 	@apply list-disc;
 }
