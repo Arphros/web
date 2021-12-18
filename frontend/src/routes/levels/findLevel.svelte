@@ -51,8 +51,8 @@
                                     <center>
                                         <div on:click={() => { goto(`/levels/${lvl.id}`) }}
                                              class="relative container cursor-pointer grid grid-cols-1 border shadow-lg shadow-violet-600/30 rounded-lg max-h-48 max-w-xl">
-                                            <img src="https://arphros.ddns.net:5000levels/{lvl.id}/main.png" alt="main"
-                                                 onerror="this.src='https://arphros.ddns.net:5000levels/__default.png'"
+                                            <img src="https://arphros.ddns.net:5000/levels/{lvl.id}/main.png" alt="main"
+                                                 onerror="this.src='https://arphros.ddns.net:5000/levels/__default.png'"
                                                  class="rounded-t-lg top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full"/>
                                             <h1 class="text-black text-3xl font-bold p-2 truncate">{lvl.name}</h1>
                                             <div class="flex flex-rows justify-evenly">
