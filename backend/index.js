@@ -21,6 +21,7 @@ app.use(express.json({ limit: '50mb' }));
 
 app.use('/storage', express.static(__dirname + '/storage'));
 app.use('/blogs', express.static(__dirname + '/blog'));
+app.use('/levels', express.static(__dirname + '/levels'));
 //app.set('view engine', 'ejs');
 
 

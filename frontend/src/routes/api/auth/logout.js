@@ -5,7 +5,7 @@ export const post = async (req) => {
     const id = JSON.parse(req.body).id;
     const cookies = cookie.parse(req.headers.cookie ?? '')
 
-    if(!id || !cookies.session_id) {
+    if (!id || !cookies.session_id) {
         return {
             body: {
                 message: "Bad request"
