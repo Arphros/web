@@ -70,7 +70,7 @@
                     </div>
                 </div>
             </div>
-            <button class="md:w-full mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg"
+            <button class="w-full mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg"
                     on:click={() => { limit = limit+6; redo() }}>Fetch More
             </button>
         </div>

@@ -91,6 +91,12 @@
                                 {/each}
                             {/await}
                         {/await}
+                        <button
+                                class="w-full max-w-md mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg"
+                                on:click={() => goto('/levels')}
+                        >See all levels
+                        </button
+                        >
                     </div>
                 </div>
             </div>
