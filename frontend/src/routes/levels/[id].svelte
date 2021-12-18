@@ -63,7 +63,8 @@
                             class="rounded-t-xl w-full h-full filter"
                     />
                     <div class="flex flex-row absolute bottom-0 right-0 gap-4 m-2">
-                        <button class="bg-gradient-to-r from-indigo-700/30 to-violet-700/30 p-2 rounded-lg text-white" on:click={() => goto('https://arphros.ddns.net:5000levels/1/map.cts')}>
+                        <button class="bg-gradient-to-r from-indigo-700/30 to-violet-700/30 p-2 rounded-lg text-white"
+                                on:click={() => goto('https://arphros.ddns.net:5000levels/1/map.cts')}>
                             Download
                         </button>
                         <button class="bg-gradient-to-r from-indigo-700/30 to-violet-700/30 p-2 rounded-lg text-white"

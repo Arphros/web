@@ -1,9 +1,9 @@
 <script>
-	import { goto } from '$app/navigation';
+    import {goto} from '$app/navigation';
 
     export let limit = 6
 
-    export let levels = fetch('http://localhost:3000/api/level/getAll', {
+    export let levels = fetch('https://arphros.vercel.app/api/level/getAll', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -14,7 +14,7 @@
     })
 
     function redo() {
-        levels = fetch('http://localhost:3000/api/level/getAll', {
+        levels = fetch('https://arphros.vercel.app/api/level/getAll', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -42,7 +42,8 @@
                 <div class="relative">
                     <div class="p-2">
                         <form action="/levels/findLevel" method="GET">
-                            <input class="block mt-4 mx-auto w-md border border-black rounded-lg focus:ring ring-blue-300 focus:ring-offset-2 p-1" name="query"
+                            <input class="block mt-4 mx-auto w-md border border-black rounded-lg focus:ring ring-blue-300 focus:ring-offset-2 p-1"
+                                   name="query"
                                    placeholder="Search..."
                                    type="text"/>
                         </form>
@@ -54,8 +55,8 @@
                                     <center>
                                         <div on:click={() => { goto(`/levels/${lvl.id}`) }}
                                              class="relative container cursor-pointer grid grid-cols-1 border shadow-lg shadow-violet-600/30 rounded-lg max-h-48 max-w-xl">
-                                            <img src="https://arphros.ddns.net:5000levels/{lvl.id}/main.png" alt="main"
-                                                 onerror="this.src='https://arphros.ddns.net:5000levels/__default.png'"
+                                            <img src="https://arphros.vercel.app/{lvl.id}/main.png" alt="main"
+                                                 onerror="this.src='https://arphros.vercel.app/__default.png'"
                                                  class="rounded-t-lg top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full"/>
                                             <h1 class="text-black text-3xl font-bold p-2 truncate">{lvl.name}</h1>
                                             <div class="flex flex-rows justify-evenly">
@@ -69,7 +70,9 @@
                     </div>
                 </div>
             </div>
-            <button class="md:w-full mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg" on:click={() => { limit = limit+6; redo() }}>Fetch More</button>
+            <button class="md:w-full mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg"
+                    on:click={() => { limit = limit+6; redo() }}>Fetch More
+            </button>
         </div>
     </div>
 </main>

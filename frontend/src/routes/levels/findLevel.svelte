@@ -38,7 +38,8 @@
                 <div class="relative">
                     <div class="p-2">
                         <form action="/levels/findLevel" method="GET">
-                            <input class="block mt-4 mx-auto w-md border border-black rounded-lg focus:ring ring-blue-300 focus:ring-offset-2 p-1" name="query"
+                            <input class="block mt-4 mx-auto w-md border border-black rounded-lg focus:ring ring-blue-300 focus:ring-offset-2 p-1"
+                                   name="query"
                                    placeholder="Search..."
                                    type="text"/>
                         </form>

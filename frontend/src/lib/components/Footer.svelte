@@ -1,8 +1,8 @@
 <script lang="ts">
-	import {onMount} from 'svelte';
-	import {goto} from '$app/navigation';
+    import {onMount} from 'svelte';
+    import {goto} from '$app/navigation';
 
-	onMount(() => {
+    onMount(() => {
         let lastScrollTop = 0;
         window.addEventListener('scroll', () => {
             let st = window.pageYOffset || document.documentElement.scrollTop;
