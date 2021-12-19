@@ -1,7 +1,8 @@
 <script>
     import {goto} from '$app/navigation';
+    import {onMount} from "svelte";
 
-    export let limit = 6
+    export let limit = 6;
 
     export let levels = fetch('https://arphros.vercel.app/api/level/getAll', {
         method: 'POST',
@@ -13,23 +14,34 @@
         })
     })
 
-    function redo() {
+    function redo(fetchLimit) {
         levels = fetch('https://arphros.vercel.app/api/level/getAll', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                limit: limit
+                limit: fetchLimit
             })
         })
     }
+
+    onMount(() => {
+        // Check if user is scroll down to the bottom of the page
+        window.addEventListener('scroll', () => {
+            if ((window.scrollY + window.innerHeight) >= document.body.scrollHeight) {
+                limit += 6
+                redo(limit)
+            }
+        });
+    })
+
 </script>
 <svelte:head>
     <title>Arphros | Levels</title>
 </svelte:head>
 <main>
-    <div class="h-full min-h-screen flex justify-center">
+    <div class="flex min-h-screen justify-center">
         <div
                 class="bg-white shadow-2xl lg:w-9/12 w-full md:m-6 my-4 rounded-xl backdrop-blur-xl backdrop-filter bg-opacity-20 h-full"
         >
@@ -70,9 +82,6 @@
                     </div>
                 </div>
             </div>
-            <button class="w-full mt-4 p-3 bg-gradient-to-r from-indigo-700/70 to-violet-700/70 bg-opacity-80 backdrop-blur-xl shadow-xl text-white rounded-lg"
-                    on:click={() => { limit = limit+6; redo() }}>Fetch More
-            </button>
         </div>
     </div>
 </main>

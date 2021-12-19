@@ -84,7 +84,7 @@
                                              onerror="this.src='https://arphros.ddns.net:5000/levels/__default.png'"
                                              class="rounded-t-lg top-0 w-full min-w-full top-0 bottom-0 min-h-full object-bottom max-w-none h-full"/>
                                         <h1 class="text-black text-3xl font-bold p-2 truncate">{lvl.name}</h1>
-                                        <div class="flex flex-rows justify-evenly">
+                                        <div class="flex flex-rows justify-left">
                                             <p class="text-gray-500 text-md truncate">{lvl.author_name}</p>
                                         </div>
                                     </div>
